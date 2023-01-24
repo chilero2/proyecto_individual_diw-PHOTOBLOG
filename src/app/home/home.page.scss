@@ -1,11 +1,23 @@
+.Home {
+}
+
 #container {
   text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-image: url(../../assets/images/bg-initial.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  // background-origin: border-box;
 
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  // transform: translateY(-50%);
 }
 
 #container strong {
