@@ -1,12 +1,14 @@
 <ion-content [fullscreen]="true" class="Home">
-  <div id="container" class="Home_container">
-    <h1>PhotoBlog</h1>
-    <h2>
-      Condense your day<span class="Home_span">with just one picture</span>
-    </h2>
-    <div class="Home_buttons">
-      <!-- <app-button></app-button> -->
-      <app-button texto="Log in"></app-button>
+  <div class="home_container">
+    <div class="body">
+      <app-logo></app-logo>
+      <h2>
+        Condense your day <span class="Home_span">with just one picture</span>
+      </h2>
+    </div>
+    <div class="wrapper">
+      <app-button texto="Log in" class="button"></app-button>
+      <app-button texto="Register" class="button"></app-button>
     </div>
   </div>
 </ion-content>

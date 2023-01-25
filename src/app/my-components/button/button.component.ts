@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 
 
 @Component({
@@ -10,14 +11,23 @@ export class ButtonComponent implements OnInit {
 
   @Input() texto: string
 
+
+
+
+
   constructor() {
     this.texto = ''
+
+
   }
 
 
 
+
+
   ngOnInit() {
-    // this.texto = ''
+
+
   }
 
 }

@@ -1,17 +1,3 @@
-.wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  height: 170px;
-  width: 100%;
-
-  margin: 0 auto;
-}
-
 .ripple-parent {
   display: flex;
   align-items: center;
@@ -20,21 +6,24 @@
   position: relative;
   overflow: hidden;
 
-  border: 1px solid #ddd;
-
   user-select: none;
 
-  width: 100%;
-  height: 50px;
-  border-radius: 8px;
+  padding: 0.3rem 1rem;
 
-  background-color: lightblue;
+  min-width: 7.5rem;
+
+  border-radius: 0.5rem;
+
+  background-color: var(--ion-color-secondary);
+
+  font-size: 1.25rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .custom-parent {
-  color: #de1e7e;
+  color: var(--ion-color-secondary-contrast);
 }
 
 .custom-ripple {
-  color: #501ace;
+  color: var(-ion-color-secondary-tint);
 }
