@@ -5,16 +5,18 @@ import { IonicModule } from '@ionic/angular';
 import { LogoComponent } from './logo/logo.component';
 import { TitleComponent } from './title/title.component';
 import { InputComponent } from './input/input.component';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent],
+  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent],
   imports: [
     CommonModule,
     IonicModule,
   ],
-  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent]
+  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent]
 })
 export class MyComponentsModule { }
