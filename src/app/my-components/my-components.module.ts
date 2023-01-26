@@ -8,16 +8,18 @@ import { InputComponent } from './input/input.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { TodayComponent } from './today/today.component';
+import { LastDaysComponent } from './last-days/last-days.component';
+import { YourFriendsComponent } from './your-friends/your-friends.component';
 
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent],
+  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent],
   imports: [
     CommonModule,
     IonicModule,
   ],
-  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent]
+  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent]
 })
 export class MyComponentsModule { }

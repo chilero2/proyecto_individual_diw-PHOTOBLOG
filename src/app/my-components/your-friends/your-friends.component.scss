@@ -1,0 +1,20 @@
+.wrapper {
+  background-color: transparent;
+  padding: 1rem 1rem;
+  font-family: "poppins", sans-serif;
+}
+
+.title {
+  padding: 0 1rem 1.5rem;
+
+  & h2 {
+    margin: 0;
+    padding-bottom: 0;
+    font-weight: 700;
+  }
+
+  span {
+    font-style: italic;
+    font-size: 0.7rem;
+  }
+}
