@@ -1,7 +1,9 @@
-<ion-header>
-  <app-nav></app-nav>
-</ion-header>
-
-<ion-content>
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <app-nav></app-nav>
+  </div>
+  <div class="content">
+    <app-today></app-today>
+  </div>
   <app-footer></app-footer>
 </ion-content>
