@@ -1,16 +1,10 @@
 .ripple-parent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 
   position: relative;
   overflow: hidden;
 
   user-select: none;
-
-  padding: 0.3rem 1rem;
-
-  min-width: 7.5rem;
 
   border-radius: 0.5rem;
 
@@ -26,4 +20,12 @@
 
 .custom-ripple {
   color: var(-ion-color-secondary-tint);
+}
+
+a {
+  display: inline-block;
+  min-width: 7.5rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.3rem 1rem;
 }

@@ -1,7 +1,12 @@
 <ion-content>
   <div class="content">
-    <app-title title="Log in"></app-title>
+    <app-title title="Register"></app-title>
     <form action="">
+      <app-input
+        type="text"
+        placeholder="username"
+        label="Username"
+      ></app-input>
       <app-input
         type="email"
         placeholder="user@gmail.com"
@@ -12,9 +17,14 @@
         placeholder="password"
         label="password"
       ></app-input>
+      <app-input
+        type="password"
+        placeholder="confirm password"
+        label="confirm password"
+      ></app-input>
       <div class="buttons">
         <app-button texto="Back" link=""></app-button>
-        <app-button texto="Log in"></app-button>
+        <app-button texto="Sign up"></app-button>
       </div>
     </form>
   </div>
