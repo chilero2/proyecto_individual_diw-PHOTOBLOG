@@ -1,31 +1,69 @@
 <ion-content>
   <div class="content">
     <app-title title="Register"></app-title>
-    <form action="">
-      <app-input
-        type="text"
-        placeholder="username"
-        label="Username"
-      ></app-input>
-      <app-input
-        type="email"
-        placeholder="user@gmail.com"
-        label="User"
-      ></app-input>
-      <app-input
-        type="password"
-        placeholder="password"
-        label="password"
-      ></app-input>
-      <app-input
-        type="password"
-        placeholder="confirm password"
-        label="confirm password"
-      ></app-input>
-      <div class="buttons">
-        <app-button texto="Back" link=""></app-button>
-        <app-button texto="Sign up" link="home-user"></app-button>
-      </div>
+    <form [formGroup]="formRegister">
+      <ion-grid color="primary" class="ion-no-padding">
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            placeholder="username"
+            formControlName="username"
+            type="text"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            placeholder="usuario@gmail.com"
+            formControlName="email"
+            type="email"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            formControlName="passwordConfirm"
+            type="password"
+            placeholder="password confirm"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <app-button texto="Back" [routerLink]="['']"></app-button>
+          <app-button
+            texto="Log in"
+            (click)="register()"
+            link="home-user"
+          ></app-button>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
 </ion-content>

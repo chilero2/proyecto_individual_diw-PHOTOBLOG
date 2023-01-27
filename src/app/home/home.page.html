@@ -7,8 +7,17 @@
       </h2>
     </div>
     <div class="wrapper">
-      <app-button texto="Log in" class="button" link="login"></app-button>
-      <app-button texto="Register" class="button" link="register"></app-button>
+      <app-button
+        texto="Log in"
+        class="button"
+        [routerLink]="['/login']"
+      ></app-button>
+      <app-button
+        texto="Register"
+        class="button"
+        link="register"
+        [routerLink]="['/register']"
+      ></app-button>
     </div>
   </div>
 </ion-content>

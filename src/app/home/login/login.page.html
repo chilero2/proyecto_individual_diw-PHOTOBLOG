@@ -1,20 +1,44 @@
 <ion-content>
   <div class="content">
     <app-title title="Log in"></app-title>
-    <form [formGroup]="formularioLogin">
-      <ion-item class="item">
-        <ion-input placeholder="usuario@gmail.com" formControlName="email" type="email" class="input"></ion-input>
-      </ion-item>
-      <ion-item class="item">
-        <ion-input formControlName="password" type="password" placeholder="password" class="input"></ion-input>
-      </ion-item>
-
-      
-    
-      <div class="buttons">
-        <app-button texto="Back" link=""></app-button>
-        <app-button texto="Log in" link="home-user"></app-button>
-      </div>
+    <form [formGroup]="formLogin">
+      <ion-grid color="primary" class="ion-no-padding">
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            placeholder="usuario@gmail.com"
+            formControlName="email"
+            type="email"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <ion-input
+            color="secondary"
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input ion-margin-bottom"
+          ></ion-input>
+        </ion-row>
+        <ion-row
+          class="ion-justify-content-between ion-no-padding"
+          color="primary"
+        >
+          <app-button texto="Back" [routerLink]="['']"></app-button>
+          <app-button
+            texto="Log in"
+            link="home-user"
+            (click)="login()"
+          ></app-button>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
 </ion-content>

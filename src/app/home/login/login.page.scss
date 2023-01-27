@@ -9,39 +9,20 @@
 
 form {
   margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
 }
 
-.buttons {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-}
-
-ion-item.item {
+ion-row {
   background-color: var(--ion-color-primary);
 }
 
 ion-input.input {
-  font-family: 'poppins', sans-serif;
-  outline: none;
+  font-family: "poppins", sans-serif;
+
   border: 2px solid var(--ion-color-secondary);
   border-radius: 0.25rem;
 
   --padding-bottom: 0.4rem;
   --padding-end: 0;
   --padding-start: 1rem;
-  --padding-top: .4rem;
-
-
-  &::placeholder {
-    color: var(--ion-color-dark-tint);
-  }
-
-  &:focus {
-    outline: 1px solid var(--ion-color-secondary);
-  }
-
+  --padding-top: 0.4rem;
 }
