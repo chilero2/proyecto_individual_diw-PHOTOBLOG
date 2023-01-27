@@ -1,17 +1,16 @@
 <ion-content>
   <div class="content">
     <app-title title="Log in"></app-title>
-    <form action="">
-      <app-input
-        type="email"
-        placeholder="user@gmail.com"
-        label="User"
-      ></app-input>
-      <app-input
-        type="password"
-        placeholder="password"
-        label="password"
-      ></app-input>
+    <form [formGroup]="formularioLogin">
+      <ion-item class="item">
+        <ion-input placeholder="usuario@gmail.com" formControlName="email" type="email" class="input"></ion-input>
+      </ion-item>
+      <ion-item class="item">
+        <ion-input formControlName="password" type="password" placeholder="password" class="input"></ion-input>
+      </ion-item>
+
+      
+    
       <div class="buttons">
         <app-button texto="Back" link=""></app-button>
         <app-button texto="Log in" link="home-user"></app-button>
