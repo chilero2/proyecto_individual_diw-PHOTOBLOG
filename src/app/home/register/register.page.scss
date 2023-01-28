@@ -26,3 +26,9 @@ ion-input.input {
   --padding-start: 1rem;
   --padding-top: 0.4rem;
 }
+
+.custom-alert .alert-button-accept {
+  --color: blue;
+  color: red;
+  background-color: red;
+}

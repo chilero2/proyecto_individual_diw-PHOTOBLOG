@@ -10,7 +10,7 @@ import { timeStamp } from 'console';
 export class ButtonComponent implements OnInit {
 
   @Input() texto: string
-  @Input() link: string
+
 
 
 
@@ -18,8 +18,6 @@ export class ButtonComponent implements OnInit {
 
   constructor() {
     this.texto = ''
-    this.link = '#'
-
 
   }
 

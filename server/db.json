@@ -1,39 +1,39 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "AngularJS (1.0.0)",
-      "releaseDate": "June 14th, 2012"
+      "id": "1",
+      "username": "emilio",
+      "email": "emilio@blasco",
+      "password": "1234",
+      "imgProfile": ""
     },
     {
-      "id": 2,
-      "title": "Angular 2",
-      "releaseDate": "September 14, 2016"
+      "id": "2",
+      "username": "carmen",
+      "email": "carmen@blasco",
+      "password": "1234",
+      "imgProfile": ""
     },
     {
-      "id": 3,
-      "title": "Angular 4",
-      "releaseDate": "March 23, 2017"
+      "id": "3",
+      "username": "pepe",
+      "email": "pepe@pepe",
+      "password": "1234",
+      "imgProfile": ""
     },
     {
-      "id": 4,
-      "title": "Angular 5",
-      "releaseDate": "November 1, 2017"
+      "id": "3ae8f9b4-c5d7-40e9-adea-c310b90977d3",
+      "userName": "lola",
+      "email": "lola",
+      "password": "lola",
+      "imgProfile": ""
     },
     {
-      "id": 5,
-      "title": "Angular 6",
-      "releaseDate": "May 4th, 2018"
-    },
-    {
-      "id": 6,
-      "title": "Angular 7",
-      "releaseDate": "October 18, 2018"
-    },
-    {
-      "id": 6,
-      "title": "Angular 8",
-      "releaseDate": "May 28, 2019"
+      "id": "94790ee7-4d35-4e60-89e5-548873e1f0b4",
+      "userName": "Mina",
+      "email": "mina@mina",
+      "password": "1234",
+      "imgProfile": ""
     }
   ]
 }
