@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Image } from 'src/app/interfaces/images';
+import { PostServiceService } from '../../post-service.service';
 
 @Component({
   selector: 'app-last-days',
@@ -7,8 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LastDaysComponent implements OnInit {
 
-  constructor() { }
+  user!: string
+  images: Image[]
+  constructor(public postServiceService: PostServiceService) {
+    this.images = []
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = this.postServiceService.getToken()
+    this.postServiceService.getImage(this.user).subscribe(data => {
+      this.images = data
+    })
+  }
+
+
+
+
+
+
 
 }

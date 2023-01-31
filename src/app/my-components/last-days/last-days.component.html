@@ -1,7 +1,10 @@
 <div class="wrapper">
   <div class="title">
     <h2>Your Last Days</h2>
-    <span>You still have no images</span>
+    <span *ngIf="images.length === 0">You still have no images</span>
+  </div>
+  <div *ngFor="let image of images">
+    <img src="./assets/images/{{ image?.url }}" alt="{{ image?.name }}" />
   </div>
   <div></div>
 </div>

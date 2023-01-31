@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormsModule, AbstractControl } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { randomBytes, randomInt } from 'crypto';
 import { User } from 'src/app/interfaces/users';
 import { PostServiceService } from 'src/app/post-service.service';
 import { HomeUserPageRoutingModule } from '../../home-user/home-user-routing.module';
 import { v4 as uuidv4 } from 'uuid'
+import { group } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -14,27 +15,67 @@ import { v4 as uuidv4 } from 'uuid'
 })
 export class RegisterPage implements OnInit {
 
-  formRegister: FormGroup
+  formRegister!: FormGroup
 
-  constructor(public fb: FormBuilder, private alertController: AlertController, private postServices: PostServiceService) {
-    this.formRegister = this.fb.group({
-      'username': new FormControl("", Validators.required),
-      'email': new FormControl("", Validators.required),
-      'password': new FormControl("", Validators.required),
-      'passwordConfirm': new FormControl("", Validators.required)
-    })
+  constructor(public formBuilder: FormBuilder, private alertController: AlertController, private postServices: PostServiceService) {
+    // this.formRegister = this.formBuilder.group({
+    //   'username': new FormControl("", Validators.compose([Validators.required, Validators.maxLength(25)])),
+    //   'email': new FormControl("", Validators.compose([Validators.required, Validators.email])),
+    //   'password': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])),
+    //   'passwordConfirm': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)))
+    // }
+
+    // )
+
   }
 
   ngOnInit() {
-
+    this.formRegister = this.buildForm()
   }
 
-  register() {
-    if (this.formRegister.invalid) {
-      this.presentAlert()
+  buildForm(): FormGroup {
+    return this.formBuilder.group({
+      'username': new FormControl("", Validators.compose([Validators.required, Validators.maxLength(25)])),
+      'email': new FormControl("", Validators.compose([Validators.required, Validators.email])),
+      'password': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])),
+      'passwordConfirm': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)]))
+    }, {
+      validators: this.ValidarContrasena('password', 'passwordConfirm')
+    })
+  }
+
+  ValidarContrasena(pass: string, passRepeat: string) {
+    return (group: AbstractControl) => {
+      const control = group.get(pass);
+      const matchingControl = group.get(passRepeat);
+
+      if (!control || !matchingControl) {
+        return null;
+      }
+
+      if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
+        return null;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+      return null;
     }
-    const data = this.formRegister.value
+  }
+
+
+
+  async register() {
+
+
+    if (this.formRegister.invalid) {
+      return this.presentAlert()
+    }
     const id: string = uuidv4()
+    const data = this.formRegister.value
 
     const user: User = {
       id: id,
@@ -44,17 +85,15 @@ export class RegisterPage implements OnInit {
       imgProfile: ''
     }
 
+
     this.postServices.addUser(user)
-
-
-
 
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Error',
-      message: 'You must complete all fields',
+      message: 'You have incorrect fields ',
       cssClass: 'custom-alert',
       buttons: [{
         text: 'Accept',

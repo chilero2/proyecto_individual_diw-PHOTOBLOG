@@ -13,6 +13,7 @@
             formControlName="username"
             type="text"
             class="input ion-margin-bottom"
+            [ngClass]="(formRegister.controls['username'].dirty || formRegister.controls['username'].touched) && formRegister.controls['username'].invalid ? 'error' : ''"
           ></ion-input>
         </ion-row>
 
@@ -26,6 +27,7 @@
             formControlName="email"
             type="email"
             class="input ion-margin-bottom"
+            [ngClass]="(formRegister.controls['email'].dirty || formRegister.controls['email'].touched) && formRegister.controls['email'].invalid ? 'error' : ''"
           ></ion-input>
         </ion-row>
         <ion-row
@@ -38,6 +40,7 @@
             type="password"
             placeholder="password"
             class="input ion-margin-bottom"
+            [ngClass]="(formRegister.controls['password'].dirty || formRegister.controls['password'].touched) && formRegister.controls['password'].invalid ? 'error' : ''"
           ></ion-input>
         </ion-row>
         <ion-row
@@ -50,6 +53,7 @@
             type="password"
             placeholder="password confirm"
             class="input ion-margin-bottom"
+            [ngClass]="(formRegister.controls['passwordConfirm'].dirty || formRegister.controls['passwordConfirm'].touched) && formRegister.controls['passwordConfirm'].invalid ? 'error' : ''"
           ></ion-input>
         </ion-row>
         <ion-row

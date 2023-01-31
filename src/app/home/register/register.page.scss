@@ -25,6 +25,9 @@ ion-input.input {
   --padding-end: 0;
   --padding-start: 1rem;
   --padding-top: 0.4rem;
+  &.error {
+    border: 2px solid var(--ion-color-danger);
+  }
 }
 
 .custom-alert .alert-button-accept {
