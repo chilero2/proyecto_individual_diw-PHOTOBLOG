@@ -58,6 +58,11 @@ export class PostServiceService {
       .pipe(map((res: Image[]) => res))
   }
 
+  getImagePerId(idImage: string) {
+    return this.http.get<Image[]>(`${this.url}images?id=${idImage}`)
+      .pipe(map((res) => res[0]))
+  }
+
 
   setToken(token: string) {
     this.cookies.set('token', token)

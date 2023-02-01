@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ViewImagePageModule } from './home-user/view-image/view-image.module';
 
 const routes: Routes = [
   {
@@ -18,10 +19,13 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./home/register/register.module').then(m => m.RegisterPageModule)
-  },  {
-    path: 'home-user',
-    loadChildren: () => import('./home-user/home-user.module').then( m => m.HomeUserPageModule)
   },
+  {
+    path: 'home-user',
+    loadChildren: () => import('./home-user/home-user.module').then(m => m.HomeUserPageModule)
+  },
+
+
 
 
 ];

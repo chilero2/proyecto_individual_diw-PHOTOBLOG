@@ -3,8 +3,14 @@
     <h2>Your Last Days</h2>
     <span *ngIf="images.length === 0">You still have no images</span>
   </div>
-  <div *ngFor="let image of images">
-    <img src="./assets/images/{{ image?.url }}" alt="{{ image?.name }}" />
+  <div class="container">
+    <ion-card class="images" *ngFor="let image of images">
+      <div [routerLink]="['/home-user', image.id]">
+        <ion-img
+          src="./assets/images/{{ image?.url }}"
+          alt="{{ image?.name }}"
+        ></ion-img>
+      </div>
+    </ion-card>
   </div>
-  <div></div>
 </div>

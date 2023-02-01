@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeUserPage
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./view-image/view-image.module').then(m => m.ViewImagePageModule)
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeUserPageRoutingModule {}
+export class HomeUserPageRoutingModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Image } from 'src/app/interfaces/images';
 import { PostServiceService } from '../../post-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-last-days',
@@ -11,7 +12,7 @@ export class LastDaysComponent implements OnInit {
 
   user!: string
   images: Image[]
-  constructor(public postServiceService: PostServiceService) {
+  constructor(public postServiceService: PostServiceService, private route: Router) {
     this.images = []
   }
 
@@ -21,6 +22,8 @@ export class LastDaysComponent implements OnInit {
       this.images = data
     })
   }
+
+
 
 
 

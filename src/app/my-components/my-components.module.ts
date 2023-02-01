@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TodayComponent } from './today/today.component';
 import { LastDaysComponent } from './last-days/last-days.component';
 import { YourFriendsComponent } from './your-friends/your-friends.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ import { YourFriendsComponent } from './your-friends/your-friends.component';
   imports: [
     CommonModule,
     IonicModule,
+    RouterModule
   ],
   exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent]
 })

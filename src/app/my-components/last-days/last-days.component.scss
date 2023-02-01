@@ -18,3 +18,10 @@
     font-size: 0.7rem;
   }
 }
+.container {
+  column-count: 2;
+  column-gap: 0;
+  & .images {
+    display: flex;
+  }
+}

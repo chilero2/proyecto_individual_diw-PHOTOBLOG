@@ -1,0 +1,12 @@
+.header,
+.content {
+  background-color: var(--ion-color-primary);
+}
+
+.content {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 67.6vh;
+}
