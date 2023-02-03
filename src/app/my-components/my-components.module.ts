@@ -11,17 +11,22 @@ import { TodayComponent } from './today/today.component';
 import { LastDaysComponent } from './last-days/last-days.component';
 import { YourFriendsComponent } from './your-friends/your-friends.component';
 import { RouterModule } from '@angular/router';
+import { CardPhotoComponent } from './card-photo/card-photo.component';
+import { DateTime } from "luxon";
 
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent],
+  declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent, CardPhotoComponent],
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+  
+    
+    
   ],
-  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent]
+  exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent, CardPhotoComponent]
 })
 export class MyComponentsModule { }

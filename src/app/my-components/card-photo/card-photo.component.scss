@@ -1,0 +1,16 @@
+ion-card  {
+    --background: var(--ion-color-primary);
+
+    &.container {
+        margin: 0;
+    }
+    
+    & ion-card-header {
+        margin-left: 1rem;
+        & span {
+            color: black;            
+            font-family: "Poller One", cursive;
+            font-size: 1.2rem;
+        }
+    }
+}

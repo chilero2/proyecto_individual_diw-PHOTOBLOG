@@ -10,20 +10,17 @@ import { Image } from '../../interfaces/images';
 })
 export class ViewImagePage implements OnInit {
 
-  image!: any
-  constructor(private activeRoute: ActivatedRoute, private postService: PostServiceService) {
+
+  constructor() {
 
   }
 
 
-  ngOnInit() {
-    const id = this.activeRoute.snapshot.paramMap.get('id')
-    if (id) {
-      this.postService.getImagePerId(id).subscribe(res => {
-        this.image = res
-      }
-      )
-    }
+  ngOnInit() {   
   }
+
+ 
+
+
 
 }

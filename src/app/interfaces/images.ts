@@ -4,7 +4,7 @@ export interface Image {
     name: string,
     user_id: string,
     url: string,
-    data: Date,
+    date: string,
     comment: string
 
 }
