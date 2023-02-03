@@ -1,14 +1,10 @@
-
 ion-content.content {
   min-height: 100vh;
   position: relative;
-
-  & app-footer {
-    position: absolute;
-    width: 100vw;
-    bottom: 0;
-    left: 0;
-  }
+}
 
 
+app-card-photo {
+  display: block;
+  min-height: 67.7vh;
 }

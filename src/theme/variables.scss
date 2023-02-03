@@ -102,6 +102,8 @@
    */
 
   body {
+    --ion-font-family: "Poppins", sans-serif;
+    --ion-background-color: #eaf1f1;
     /** primary **/
     --ion-color-primary: #eaf1f1;
     --ion-color-primary-rgb: 234, 241, 241;
@@ -184,6 +186,8 @@
    */
 
   .ios body {
+    --ion-font-family: "Poppins", sans-serif;
+    --ion-background-color: #eaf1f1;
     --ion-background-color: #eaf1f1;
     --ion-background-color-rgb: 234, 241, 241;
 
@@ -227,6 +231,8 @@
    */
 
   .md body {
+    --ion-font-family: "Poppins", sans-serif;
+    --ion-background-color: #eaf1f1;
     --ion-background-color: #eaf1f1;
     --ion-background-color-rgb: 234, 241, 241;
 

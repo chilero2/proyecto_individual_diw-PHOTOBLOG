@@ -30,4 +30,12 @@
   font-weight: 700;
 }
 
+ion-action-sheet.sheet .action-sheet-group {
+  background: var(--ion-color-secondary);
+  
+}
+
+ion-action-sheet.my-custom-class .action-sheet-title {
+  color: #fff;
+}
 
