@@ -1,17 +1,10 @@
-.header {
-  padding: 4rem 1rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  background-color: transparent;
-}
+
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 0.2rem;
+  gap: 0.6rem;
   font-family: "Poller One", cursive;
 }
 
@@ -19,4 +12,31 @@ h1 {
   font-size: 1.7rem;
   color: var(--ion-color-secondary);
   margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  gap: 2rem;
+
+  padding-top: 2rem;
+
+
+  list-style: none;
+  color: var(--ion-color-high);
+  font-weight: 700;
+  font-size: 1.8rem;
+
+}
+
+
+
+ion-menu::part(backdrop) {
+  background-color: #7a7ff3aa;
+}
+
+ion-menu::part(container) {
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 0px 16px #7a7ff370;
 }

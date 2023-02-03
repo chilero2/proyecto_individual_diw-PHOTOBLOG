@@ -35,7 +35,19 @@ ion-action-sheet.sheet .action-sheet-group {
   
 }
 
-ion-action-sheet.my-custom-class .action-sheet-title {
+ion-action-sheet.sheet .action-sheet-title {
   color: #fff;
+  font-weight: 700;
+  text-align: center;
 }
+
+ion-menu.menu ion-content {
+    --background: var(--ion-color-secondary);
+    color: var(--ion-color-high)
+  }
+
+
+
+
+
 
