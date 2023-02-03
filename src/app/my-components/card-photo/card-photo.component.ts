@@ -10,26 +10,44 @@ import { DateTime } from "luxon";
   styleUrls: ['./card-photo.component.scss'],
 })
 export class CardPhotoComponent implements OnInit {
-  
+
   image!: Image
+  urlImage: string = ''
   constructor(private activeRoute: ActivatedRoute, private postService: PostServiceService) {
-  
-   }
+
+  }
 
   ngOnInit() {
     const id = this.activeRoute.snapshot.paramMap.get('id')
     if (id) {
       this.postService.getImagePerId(id).subscribe(res => {
-        this.image = {... res}
+        this.image = res
       }
       )
     }
-    
+
+
   }
+
+  loadImage() {
+    const id = this.activeRoute.snapshot.paramMap.get('id')
+    if (id) {
+      this.postService.getImagePerId(id).subscribe(res => {
+        this.image = res
+      }
+      )
+    }
+
+  }
+
+  linkImg(): string {
+    return 'assets/images/' + this.image?.url
+  }
+
   convertDate() {
     return DateTime.fromISO(this.image?.date).toFormat('LLLL d yyyy')
-   }
+  }
 
- 
+
 
 }

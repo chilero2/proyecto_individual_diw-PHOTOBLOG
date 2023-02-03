@@ -1,12 +1,11 @@
-
 <ion-card class="container ion-no-border">
   <ion-card-header>
-     <span >{{convertDate()}}</span> 
+    <span>{{ convertDate() }}</span>
   </ion-card-header>
 
   <ion-card-content>
-    <img src="./assets/images/{{image?.url}}" alt="{{image?.name}}" /> 
-    <p>"{{image?.comment}}"</p>
+    <img src="./assets/images/{{ image.url }}" alt="{{ image.name }}" />
+    <p>"{{ image.comment }}"</p>
     <app-button texto="Volver" [routerLink]="['/home-user']"></app-button>
   </ion-card-content>
 </ion-card>
