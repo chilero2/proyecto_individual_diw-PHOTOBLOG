@@ -1,3 +1,10 @@
+#main-content {
+  --background: red;
+}
+ion-toolbar {
+  --background: var(--ion-color-primary);
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -31,10 +38,15 @@ ion-list.ul {
     font-weight: 700;
     font-size: 1.8rem;
   }
+  & ion-item.out::part(native) {
+    color: var(--ion-color-tertiary);
+    border-top: 3px solid var(--ion-color-text-high);
+    padding-top: 1rem;
+  }
 }
 
 ion-menu-button.button {
-  font-size: 10rem;
+  font-size: 3rem;
 }
 
 ion-menu::part(backdrop) {

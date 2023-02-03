@@ -12,6 +12,7 @@ export class TodayComponent implements OnInit {
   constructor(private actionSheetCtrl: ActionSheetController) {
     this.title = ''
   }
+  ngOnInit() { }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -45,8 +46,8 @@ export class TodayComponent implements OnInit {
     const result = await actionSheet.onDidDismiss();
     // this.result = JSON.stringify(result, null, 2);
   }
-  
 
-  ngOnInit() { }
+
+
 
 }

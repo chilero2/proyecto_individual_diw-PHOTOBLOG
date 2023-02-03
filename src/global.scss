@@ -25,14 +25,16 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+// alert styles
 .custom-alert .alert-button-accept {
   color: var(--ion-color-danger);
   font-weight: 700;
 }
 
+// action sheet styles
 ion-action-sheet.sheet .action-sheet-group {
   background: var(--ion-color-secondary);
-  
+  font-weight: 400;
 }
 
 ion-action-sheet.sheet .action-sheet-title {
@@ -41,13 +43,19 @@ ion-action-sheet.sheet .action-sheet-title {
   text-align: center;
 }
 
+ion-action-sheet.sheet .action-sheet-cancel {
+  background-color: var(--ion-color-text-high-shade);
+}
+
+ion-action-sheet.sheet .action-sheet-cancel::after {
+  color: var(--ion-color-danger);
+  background-color: var(--ion-color-text-high);
+  font-weight: 700;
+  text-align: center;
+}
+
+// menu styles
 ion-menu.menu ion-content {
-    --background: var(--ion-color-secondary);
-    color: var(--ion-color-high)
-  }
-
-
-
-
-
-
+  --background: var(--ion-color-secondary);
+  color: var(--ion-color-high);
+}
