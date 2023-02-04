@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, Users } from './interfaces/users';
 import { AlertController } from '@ionic/angular';
-import { catchError, map } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { CookieService } from "ngx-cookie-service";
 import { Image } from './interfaces/images';
 
@@ -12,46 +12,28 @@ import { Image } from './interfaces/images';
   providedIn: 'root'
 })
 export class PostServiceService {
+  logged = false
 
   url = 'http://192.168.8.102:3000/'
-  // url = 'http://localhost:3000/'
+  // url = 'http://localhost:3000'
 
 
   constructor(private cookies: CookieService, public http: HttpClient, private route: Router, private alertController: AlertController) { }
 
-  auth(user: User): any {
-    this.http.get<User[]>(`${this.url}users?email=${user.email}`)
-      .subscribe((data: User[]) => {
-        try {
-          if (data[0].email === user.email && data[0].password === user.password) {
-            localStorage.setItem('usuario', JSON.stringify(data[0]))
-            this.setToken(data[0].id)
-            return this.route.navigate(['home-user'])
-          }
-          return this.presentAlert('Usuario o constraseña no valido')
-        } catch (error) {
-          return this.presentAlert('Usuario o constraseña no valido')
-        }
-
-      })
+  auth(user: User): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}users?email=${user.email}`)
   }
+  // auth(user: User): Observable<User[]> {
+  //   return this.http.get<User[]>(`${this.url}users?email=${user.email}`)
+  // }
 
 
-  addUser(user: User): any {
-    this.http.post<User>(`${this.url}/users`, user, {
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}users`, user, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     })
-      .subscribe(data => {
-        if (data) {
-
-          localStorage.setItem('usuario', JSON.stringify(data))
-          this.setToken(data.id)
-          return this.route.navigate(['home-user'])
-        }
-        return this.presentAlert('Error')
-      })
   }
 
   getImage(idUser: string) {
@@ -66,11 +48,20 @@ export class PostServiceService {
 
 
   setToken(token: string) {
+    this.logged = true
     this.cookies.set('token', token)
   }
 
+
+
   getToken() {
     return this.cookies.get("token");
+  }
+
+  deleteToken() {
+    this.logged = false
+    localStorage.removeItem('usuario');
+    this.cookies.delete('token')
   }
 
   async presentAlert(message: string) {

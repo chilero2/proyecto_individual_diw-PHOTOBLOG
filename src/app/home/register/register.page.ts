@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormsModule, AbstractControl } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { randomBytes, randomInt } from 'crypto';
 import { User } from 'src/app/interfaces/users';
 import { PostServiceService } from 'src/app/post-service.service';
 import { HomeUserPageRoutingModule } from '../../home-user/home-user-routing.module';
 import { v4 as uuidv4 } from 'uuid'
 import { group } from 'console';
+import { Router } from '@angular/router';
+import { Users } from '../../interfaces/users';
 
 @Component({
   selector: 'app-register',
@@ -17,15 +19,12 @@ export class RegisterPage implements OnInit {
 
   formRegister!: FormGroup
 
-  constructor(public formBuilder: FormBuilder, private alertController: AlertController, private postServices: PostServiceService) {
-    // this.formRegister = this.formBuilder.group({
-    //   'username': new FormControl("", Validators.compose([Validators.required, Validators.maxLength(25)])),
-    //   'email': new FormControl("", Validators.compose([Validators.required, Validators.email])),
-    //   'password': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])),
-    //   'passwordConfirm': new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)))
-    // }
+  constructor(public formBuilder: FormBuilder,
+    private alertController: AlertController,
+    private postServices: PostServiceService,
+    private router: Router,
+    public navCtr: NavController) {
 
-    // )
 
   }
 
@@ -69,8 +68,6 @@ export class RegisterPage implements OnInit {
 
 
   async register() {
-
-
     if (this.formRegister.invalid) {
       return this.presentAlert()
     }
@@ -84,10 +81,15 @@ export class RegisterPage implements OnInit {
       password: data.password,
       imgProfile: ''
     }
-
-
     this.postServices.addUser(user)
-
+      .subscribe(data => {
+        if (data) {
+          localStorage.setItem('usuario', JSON.stringify(data))
+          this.postServices.setToken(data.id)
+          return this.navCtr.navigateRoot('home-user')
+        }
+        return this.presentAlert()
+      })
   }
 
   async presentAlert() {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/users';
 import { PostServiceService } from 'src/app/post-service.service';
 
@@ -15,7 +15,11 @@ export class LoginPage implements OnInit {
 
   formLogin: FormGroup
 
-  constructor(public fb: FormBuilder, private alertController: AlertController, public postServices: PostServiceService) {
+  constructor(public fb: FormBuilder,
+    private alertController: AlertController,
+    public postServices: PostServiceService,
+    private route: Router,
+    public navCtr: NavController) {
     this.header = false
     this.formLogin = this.fb.group({
       'email': new FormControl("", Validators.required),
@@ -26,7 +30,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  async login() {
     if (this.formLogin.invalid) {
       return this.presentAlert('You must complete all fields')
     }
@@ -39,7 +43,19 @@ export class LoginPage implements OnInit {
       imgProfile: ''
     }
 
-    return this.postServices.auth(user)
+    this.postServices.auth(user)
+      .subscribe((data: User[]) => {
+        try {
+          if (data[0].email === user.email && data[0].password === user.password) {
+            localStorage.setItem('usuario', JSON.stringify(data[0]))
+            this.postServices.setToken(data[0].id)
+            return this.navCtr.navigateRoot('home-user')
+          }
+          return this.presentAlert('Usuario o constraseña no valido')
+        } catch (error) {
+          return this.presentAlert('Usuario o constraseña no valido')
+        }
+      })
   }
 
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ViewImagePageModule } from './home-user/view-image/view-image.module';
+import { LoginGuard } from './login.guard';
+import { NoLoginGuard } from './no-login.guard';
 
 const routes: Routes = [
   {
@@ -14,15 +16,18 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./home/login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./home/login/login.module').then(m => m.LoginPageModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./home/register/register.module').then(m => m.RegisterPageModule)
+    loadChildren: () => import('./home/register/register.module').then(m => m.RegisterPageModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'home-user',
-    loadChildren: () => import('./home-user/home-user.module').then(m => m.HomeUserPageModule)
+    loadChildren: () => import('./home-user/home-user.module').then(m => m.HomeUserPageModule),
+    canActivate: [NoLoginGuard]
   },
 
 

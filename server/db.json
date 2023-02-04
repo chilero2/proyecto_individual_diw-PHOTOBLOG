@@ -41,9 +41,22 @@
       "email": "pepe@pepe",
       "password": "1234",
       "imgProfile": ""
+    },
+    {
+      "id": "fff3751c-2beb-41d8-8296-b24aad0ce8fb",
+      "userName": "lola",
+      "email": "lola@lola",
+      "password": "1234",
+      "imgProfile": ""
+    },
+    {
+      "id": "79fc9a19-96e9-42ee-bd25-af7868bc8181",
+      "userName": "loli",
+      "email": "loli@loli",
+      "password": "1234",
+      "imgProfile": ""
     }
   ],
-
   "images": [
     {
       "id": "1",

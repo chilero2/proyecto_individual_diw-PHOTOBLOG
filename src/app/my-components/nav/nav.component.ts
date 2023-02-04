@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PostServiceService } from '../../post-service.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private postService: PostServiceService, private route: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  logOut() {
+    this.postService.deleteToken()
+
+    this.route.navigate([''])
+  }
 
 }
