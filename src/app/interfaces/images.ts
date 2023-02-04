@@ -8,3 +8,4 @@ export interface Image {
     comment: string
 
 }
+

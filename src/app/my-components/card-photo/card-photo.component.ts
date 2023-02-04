@@ -44,6 +44,14 @@ export class CardPhotoComponent implements OnInit {
     return 'assets/images/' + this.image?.url
   }
 
+  nameImg(): string {
+    return this.image?.name
+  }
+
+  commentImg(): string {
+    return this.image?.comment
+  }
+
   convertDate() {
     return DateTime.fromISO(this.image?.date).toFormat('LLLL d yyyy')
   }

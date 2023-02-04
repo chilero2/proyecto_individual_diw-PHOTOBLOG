@@ -13,7 +13,8 @@ import { Image } from './interfaces/images';
 })
 export class PostServiceService {
 
-  url = 'http://localhost:3000/'
+  url = 'http://192.168.8.102:3000/'
+  // url = 'http://localhost:3000/'
 
 
   constructor(private cookies: CookieService, public http: HttpClient, private route: Router, private alertController: AlertController) { }
@@ -37,7 +38,7 @@ export class PostServiceService {
 
 
   addUser(user: User): any {
-    this.http.post<User>(`http://localhost:3000/users`, user, {
+    this.http.post<User>(`${this.url}/users`, user, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
