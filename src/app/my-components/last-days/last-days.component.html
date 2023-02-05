@@ -6,10 +6,7 @@
   <div class="container">
     <ion-card class="images" *ngFor="let image of images">
       <div [routerLink]="['/home-user', image.id]">
-        <ion-img
-          src="./assets/images/{{ image?.url }}"
-          alt="{{ image?.name }}"
-        ></ion-img>
+        <ion-img [src]="getUrl(image.url)" [alt]="image.name"></ion-img>
       </div>
     </ion-card>
   </div>

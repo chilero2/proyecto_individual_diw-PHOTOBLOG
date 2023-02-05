@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostServiceService } from '../post-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-user',
@@ -7,6 +8,10 @@ import { PostServiceService } from '../post-service.service';
   styleUrls: ['./home-user.page.scss'],
 })
 export class HomeUserPage implements OnInit {
+
+  // @ViewChild('myNav') nav: NavController
+
+  // public rootPage: any = TabsPage
 
 
 

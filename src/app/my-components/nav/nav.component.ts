@@ -15,8 +15,12 @@ export class NavComponent implements OnInit {
 
   logOut() {
     this.postService.deleteToken()
-
-    this.route.navigate([''])
+    this.route.navigate(['/home'], { replaceUrl: true })
   }
+  goHome() {
+    this.route.navigate(['/home-user'], { replaceUrl: true })
+  }
+
+
 
 }

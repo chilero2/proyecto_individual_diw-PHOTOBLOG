@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { PostServiceService } from '../../post-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-today',
@@ -9,10 +11,11 @@ import { ActionSheetController } from '@ionic/angular';
 export class TodayComponent implements OnInit {
   @Input() title: string
 
-  constructor(private actionSheetCtrl: ActionSheetController) {
+  constructor(private actionSheetCtrl: ActionSheetController, private postService: PostServiceService, private route: Router) {
     this.title = ''
   }
   ngOnInit() { }
+
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({

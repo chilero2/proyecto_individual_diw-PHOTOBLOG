@@ -7,15 +7,12 @@
       </h2>
     </div>
     <div class="wrapper">
-      <app-button
-        texto="Log in"
-        class="button"
-        [routerLink]="['/login']"
-      ></app-button>
+      <app-button texto="Log in" class="button" (click)="login()"></app-button>
       <app-button
         texto="Register"
         class="button"
         link="register"
+        (click)="register()"
         [routerLink]="['/register']"
       ></app-button>
     </div>

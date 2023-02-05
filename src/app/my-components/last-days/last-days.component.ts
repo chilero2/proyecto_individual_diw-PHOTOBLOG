@@ -21,8 +21,12 @@ export class LastDaysComponent implements OnInit {
     this.postServiceService.getImage(this.user).subscribe(data => {
       this.images = data
     })
+
   }
 
+  getUrl(url: string) {
+    return `./assets/images/${url}`
+  }
 
 
 

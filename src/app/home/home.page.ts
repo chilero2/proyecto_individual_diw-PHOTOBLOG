@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { PostServiceService } from '../post-service.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private route: Router, private postService: PostServiceService) { }
 
+  login() {
+    this.postService.deleteToken()
+    this.route.navigate(['/login'])
+  }
+
+  register() {
+    this.postService.deleteToken()
+    this.route.navigate(['/register'])
+  }
 }
