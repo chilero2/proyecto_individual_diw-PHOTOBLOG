@@ -5,7 +5,8 @@
   </div>
   <div class="container">
     <ion-card class="images" *ngFor="let image of images">
-      <div [routerLink]="['/home-user', image.id]">
+      <div (click)="goPhoto(image.id)">
+        <!-- <div [routerLink]="['/home-user', image.id]"> -->
         <ion-img [src]="getUrl(image.url)" [alt]="image.name"></ion-img>
       </div>
     </ion-card>

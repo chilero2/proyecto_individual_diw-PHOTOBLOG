@@ -8,12 +8,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeUserPage,
-    // canActivate: [NoLoginGuard]
+    canActivate: [NoLoginGuard]
   },
   {
     path: ':id',
     loadChildren: () => import('./view-image/view-image.module').then(m => m.ViewImagePageModule),
-    // canActivate: [NoLoginGuard]
+    canActivate: [NoLoginGuard]
   }
 ];
 

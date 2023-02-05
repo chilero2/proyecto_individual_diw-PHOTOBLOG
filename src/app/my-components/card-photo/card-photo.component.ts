@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Image } from 'src/app/interfaces/images';
 import { PostServiceService } from 'src/app/post-service.service';
 import { DateTime } from "luxon";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-card-photo',
@@ -13,7 +14,7 @@ export class CardPhotoComponent implements OnInit {
 
   image!: Image
   urlImage: string = ''
-  constructor(private activeRoute: ActivatedRoute, private postService: PostServiceService) {
+  constructor(private activeRoute: ActivatedRoute, private navCtrl: NavController, private postService: PostServiceService) {
 
   }
 
@@ -25,7 +26,10 @@ export class CardPhotoComponent implements OnInit {
       }
       )
     }
+  }
 
+  back() {
+    this.navCtrl.navigateBack('/home-user', { replaceUrl: true })
 
   }
 

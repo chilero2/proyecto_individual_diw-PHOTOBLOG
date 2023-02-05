@@ -9,9 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class HomeUserPage implements OnInit {
 
-  // @ViewChild('myNav') nav: NavController
 
-  // public rootPage: any = TabsPage
 
 
 

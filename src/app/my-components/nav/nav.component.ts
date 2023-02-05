@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostServiceService } from '../../post-service.service';
+import { NavController } from '@ionic/angular';
+import { HomePage } from '../../home/home.page';
 
 @Component({
   selector: 'app-nav',
@@ -9,16 +11,16 @@ import { PostServiceService } from '../../post-service.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private postService: PostServiceService, private route: Router) { }
+  constructor(private postService: PostServiceService, private navCntl: NavController) { }
 
   ngOnInit() { }
 
   logOut() {
     this.postService.deleteToken()
-    this.route.navigate(['/home'], { replaceUrl: true })
+    this.navCntl.navigateRoot('')
   }
   goHome() {
-    this.route.navigate(['/home-user'], { replaceUrl: true })
+    this.navCntl.navigateRoot('home-user')
   }
 
 
