@@ -7,4 +7,8 @@
     texto="Simplify your day"
     (click)="presentActionSheet()"
   ></app-button>
+  <img [src]="getImage()" alt="" />
+  <!-- <div *ngFor="let foto of getPhotos(); index as position">
+    <img [src]="foto.webviewPath" alt="{{ foto.filepath }}" />
+  </div> -->
 </div>

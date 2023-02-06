@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { PostServiceService } from '../../post-service.service';
 import { Router } from '@angular/router';
+import { CameraServicesService } from '../../camera-services.service';
 
 @Component({
   selector: 'app-today',
@@ -10,11 +11,26 @@ import { Router } from '@angular/router';
 })
 export class TodayComponent implements OnInit {
   @Input() title: string
+  result: string
 
-  constructor(private actionSheetCtrl: ActionSheetController, private postService: PostServiceService, private route: Router) {
+  constructor(private actionSheetCtrl: ActionSheetController,
+    private postService: PostServiceService,
+    private route: Router,
+    private cameraService: CameraServicesService) {
     this.title = ''
+    this.result = ''
   }
-  ngOnInit() { }
+  async ngOnInit() {
+    await this.cameraService.loadSave()
+
+  }
+
+  getImage() {
+    // this.cameraService.loadSave()
+
+  }
+
+
 
 
   async presentActionSheet() {
@@ -24,9 +40,10 @@ export class TodayComponent implements OnInit {
       buttons: [
         {
           text: 'Camera',
-          data: {
-            action: 'delete',
+          handler: () => {
+            this.camera()
           },
+
         },
         {
           text: 'Album',
@@ -46,9 +63,17 @@ export class TodayComponent implements OnInit {
 
     await actionSheet.present();
 
-    const result = await actionSheet.onDidDismiss();
+    // const result = await actionSheet.onDidDismiss();
     // this.result = JSON.stringify(result, null, 2);
   }
+
+  camera() {
+    this.cameraService.addNewToGallery(this.postService.getToken())
+  }
+
+
+
+
 
 
 

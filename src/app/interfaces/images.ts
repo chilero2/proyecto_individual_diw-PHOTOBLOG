@@ -5,7 +5,8 @@ export interface Image {
     user_id: string,
     url: string,
     date: string,
-    comment: string
+    comment: string,
+
 
 }
 

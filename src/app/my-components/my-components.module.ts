@@ -23,10 +23,10 @@ import { DateTime } from "luxon";
     CommonModule,
     IonicModule,
     RouterModule,
-    
-  
-    
-    
+
+
+
+
   ],
   exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent, CardPhotoComponent]
 })
