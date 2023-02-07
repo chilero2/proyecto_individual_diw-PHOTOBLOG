@@ -75,12 +75,6 @@ export class TodayComponent implements OnInit {
 
   }
 
-
-
-
-
-
-
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'How do you want to get the picture?',
@@ -119,7 +113,6 @@ export class TodayComponent implements OnInit {
       })
   }
 
-
   async savePicture(cameraPhoto: Photo) {
     //Convertir la foto a formato base64
     const base64Data = await this.cameraService.readAsBase64(cameraPhoto)
@@ -132,7 +125,6 @@ export class TodayComponent implements OnInit {
       path: `${this.cameraService.PHOTO_STORAGE}/${fileName}`,
       data: base64Data,
     })
-    console.log('imagen', cameraPhoto)
     this.loadFiles()
   }
 }

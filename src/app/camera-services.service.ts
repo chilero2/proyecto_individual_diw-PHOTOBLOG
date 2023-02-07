@@ -29,9 +29,7 @@ export class CameraServicesService {
       source: CameraSource.Camera,
       quality: 100,
       saveToGallery: true,
-
     })
-    console.log(fotoCapturada)
     return fotoCapturada
 
     // if (fotoCapturada) {
@@ -76,8 +74,6 @@ export class CameraServicesService {
       })
       return file.data
     }
-
-
     const response = await fetch(cameraPhoto.webPath!)
     const blob = await response.blob()
     return await this.convertBlobToBase64(blob) as string
