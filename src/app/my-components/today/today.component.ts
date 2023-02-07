@@ -1,8 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, LoadingController } from '@ionic/angular';
 import { PostServiceService } from '../../post-service.service';
 import { Router } from '@angular/router';
 import { CameraServicesService } from '../../camera-services.service';
+import { Image } from 'src/app/interfaces/images';
+import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem'
+import { readFile } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+import { Photo } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-today',
@@ -12,23 +18,65 @@ import { CameraServicesService } from '../../camera-services.service';
 export class TodayComponent implements OnInit {
   @Input() title: string
   result: string
+  image: Image[] = []
 
   constructor(private actionSheetCtrl: ActionSheetController,
     private postService: PostServiceService,
     private route: Router,
-    private cameraService: CameraServicesService) {
+    private cameraService: CameraServicesService,
+    private loadingCtrl: LoadingController) {
     this.title = ''
     this.result = ''
   }
   async ngOnInit() {
-    await this.cameraService.loadSave()
+    await this.loadFiles()
 
   }
 
-  getImage() {
-    // this.cameraService.loadSave()
+  async loadFiles() {
+    this.image = []
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading Data...'
+    })
+    await loading.present()
+    Filesystem.readdir({
+      directory: Directory.Data,
+      path: this.cameraService.PHOTO_STORAGE
+    }).then(res => {
+      console.log('HERE', res)
+      this.loadingFileData(res.files)
+    }, async err => {
+      console.log('err', err)
+      await Filesystem.mkdir({
+        directory: Directory.Data,
+        path: this.cameraService.PHOTO_STORAGE
+      })
+    }).then(() => {
+      loading.dismiss()
+    })
+  }
+
+  async loadingFileData(fileName: any[]) {
+    const file = fileName[fileName.length - 1]
+    const filePath = `${this.cameraService.PHOTO_STORAGE}/${file.name}`
+    const readFile = await Filesystem.readFile({
+      directory: Directory.Data,
+      path: filePath
+    })
+    this.image = []
+    this.image.push({
+      id: uuidv4(),
+      name: filePath,
+      user_id: this.postService.getToken(),
+      url: `data:image/jpg;base64,${readFile.data}` || '',
+      date: new Date().toLocaleDateString('en-US'),
+      comment: ''
+    })
 
   }
+
+
+
 
 
 
@@ -62,20 +110,29 @@ export class TodayComponent implements OnInit {
     });
 
     await actionSheet.present();
-
-    // const result = await actionSheet.onDidDismiss();
-    // this.result = JSON.stringify(result, null, 2);
   }
 
   camera() {
-    this.cameraService.addNewToGallery(this.postService.getToken())
+    this.cameraService.addNewToGallery()
+      .then((res) => {
+        this.savePicture(res)
+      })
   }
 
 
+  async savePicture(cameraPhoto: Photo) {
+    //Convertir la foto a formato base64
+    const base64Data = await this.cameraService.readAsBase64(cameraPhoto)
 
-
-
-
-
-
+    //Escribir la foto en el directorio
+    const fileName = new Date().getTime() + '.jpg'
+    console.log(`${this.cameraService.PHOTO_STORAGE}/${fileName}`)
+    const img = await Filesystem.writeFile({
+      directory: Directory.Data,
+      path: `${this.cameraService.PHOTO_STORAGE}/${fileName}`,
+      data: base64Data,
+    })
+    console.log('imagen', cameraPhoto)
+    this.loadFiles()
+  }
 }
