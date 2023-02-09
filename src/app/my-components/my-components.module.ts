@@ -12,7 +12,7 @@ import { LastDaysComponent } from './last-days/last-days.component';
 import { YourFriendsComponent } from './your-friends/your-friends.component';
 import { RouterModule } from '@angular/router';
 import { CardPhotoComponent } from './card-photo/card-photo.component';
-import { DateTime } from "luxon";
+
 
 
 
@@ -23,6 +23,9 @@ import { DateTime } from "luxon";
     CommonModule,
     IonicModule,
     RouterModule,
+
+
+
 
 
 

@@ -1,10 +1,11 @@
 <div class="wrapper">
   <div class="title">
     <h2>Your Friends</h2>
-    <span>You do not have any friends yet</span>
+    <span *ngIf="friends.length === 0">You do not have any friends yet</span>
   </div>
-  <div class="container">
-    <div *ngFor="let friend of friends">
+
+  <ion-slides [options]="slideOpts">
+    <ion-slide *ngFor="let friend of friends">
       <ion-avatar>
         <img
           *ngIf="friend.imgProfile === ''"
@@ -17,7 +18,7 @@
           [src]="friend.imgProfile"
         />
       </ion-avatar>
-      <small>{{ friend.userName }}</small>
-    </div>
-  </div>
+      <small>@{{ friend.userName }}</small>
+    </ion-slide>
+  </ion-slides>
 </div>

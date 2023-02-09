@@ -19,7 +19,13 @@
   }
 }
 
-.container {
+ion-slide {
   display: flex;
-  
+  flex-direction: column;
+  & small {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ion-color-medium);
+  }
 }
