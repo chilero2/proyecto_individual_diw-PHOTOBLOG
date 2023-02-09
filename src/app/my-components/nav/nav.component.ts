@@ -23,6 +23,10 @@ export class NavComponent implements OnInit {
     this.navCntl.navigateRoot('home-user')
   }
 
+  goProfile() {
+    this.navCntl.navigateForward('home-user/my-profile')
+  }
+
 
 
 }

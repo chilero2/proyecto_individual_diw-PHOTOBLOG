@@ -2,7 +2,9 @@
   <ion-content class="ion-padding">
     <ion-list class="ul">
       <ion-item lines="none" (click)="goHome()">Home</ion-item>
-      <ion-item lines="none">My profile</ion-item>
+      <ion-item lines="none" (click)="goProfile()" routerDirection="forward"
+        >My profile</ion-item
+      >
       <ion-item lines="none">My Story</ion-item>
       <ion-item lines="none">My Friends</ion-item>
       <ion-item class="out" lines="none" (click)="logOut()">Log Out</ion-item>

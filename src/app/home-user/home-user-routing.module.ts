@@ -11,9 +11,13 @@ const routes: Routes = [
     // canActivate: [NoLoginGuard]
   },
   {
-    path: ':id',
+    path: 'image/:id',
     loadChildren: () => import('./view-image/view-image.module').then(m => m.ViewImagePageModule),
     // canActivate: [NoLoginGuard]
+  },
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfilePageModule)
   }
 ];
 

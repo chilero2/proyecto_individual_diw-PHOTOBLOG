@@ -1,4 +1,7 @@
-<div class="ion-activatable ripple-parent custom-parent">
+<div
+  class="ion-activatable ripple-parent custom-parent"
+  [ngClass]="lime ? 'lime' : ''"
+>
   <span> {{ texto }}</span>
   <ion-ripple-effect></ion-ripple-effect>
 </div>

@@ -13,6 +13,13 @@
   font-size: 1.25rem;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
+
+  &.lime {
+    background-color: var(--ion-color-high);
+    color: #444;
+    width: fit-content;
+    padding: 0.2rem 0.5rem;
+  }
 }
 
 .custom-parent {

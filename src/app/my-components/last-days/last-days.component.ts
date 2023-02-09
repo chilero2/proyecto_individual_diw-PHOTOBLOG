@@ -26,7 +26,7 @@ export class LastDaysComponent implements OnInit {
   }
 
   goPhoto(id: string) {
-    const url = `/home-user/${id}`
+    const url = `/home-user/image/${id}`
     this.navCtrl.navigateForward(url, { replaceUrl: true })
   }
 

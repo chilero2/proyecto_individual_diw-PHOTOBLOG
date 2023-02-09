@@ -1,0 +1,45 @@
+.header,
+.content {
+  background-color: var(--ion-color-primary);
+}
+
+.content {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 67.6vh;
+}
+
+.card {
+  margin: 2rem 0.5rem;
+  padding: 0.5rem 1rem 1rem;
+  background-color: var(--ion-color-secondary);
+  border-radius: 1rem;
+  border: 0.3125rem solid var(--ion-color-high);
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & h2 {
+      font-weight: 700;
+      font-size: 1.75rem;
+    }
+  }
+
+  &-content {
+    & p {
+      margin-left: 1rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #444;
+    }
+  }
+
+  &-button {
+    display: flex;
+    justify-content: center;
+  }
+}

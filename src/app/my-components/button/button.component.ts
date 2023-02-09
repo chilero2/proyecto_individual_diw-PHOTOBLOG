@@ -10,14 +10,12 @@ import { timeStamp } from 'console';
 export class ButtonComponent implements OnInit {
 
   @Input() texto: string
-
-
-
-
+  @Input() lime: boolean
 
 
   constructor() {
     this.texto = ''
+    this.lime = false
 
   }
 
