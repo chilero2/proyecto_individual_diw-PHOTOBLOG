@@ -23,9 +23,7 @@ export class PostServiceService {
   auth(user: User): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}users?email=${user.email}`)
   }
-  // auth(user: User): Observable<User[]> {
-  //   return this.http.get<User[]>(`${this.url}users?email=${user.email}`)
-  // }
+
 
 
   addUser(user: User): Observable<User> {
@@ -46,13 +44,15 @@ export class PostServiceService {
       .pipe(map((res) => res[0]))
   }
 
+  getFriends(idUser: string) {
+    return this.http.get<User[]>(`${this.url}users?id_ne=${idUser}`)
+  }
+
 
   setToken(token: string) {
     this.logged = true
     this.cookies.set('token', token)
   }
-
-
 
   getToken() {
     return this.cookies.get("token");

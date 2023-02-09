@@ -1,17 +1,15 @@
 <div class="wrapper">
   <div class="title">
     <h2>Your Today</h2>
-   
-    <span *ngIf="image === undefined">You still haven't summed up the day</span>
+    <span *ngIf="images.length === 0">You still haven't summed up the day</span>
   </div>
-  <img *ngIf="image !== undefined" [src]="image.url" alt="image.name">
-  <!-- <div *ngFor="let foto of image">
-    <img [src]="foto.url" alt="{{ foto.name }}" />
-  </div> -->
+  <div class="container">
+    <ion-card class="images" *ngFor="let foto of images">
+      <ion-img [src]="foto.url" alt="{{ foto.name }}"></ion-img>
+    </ion-card>
+  </div>
   <app-button
-    texto="Simplify your day"
-    (click)="presentActionSheet()"
-  ></app-button>
-
-
+  texto="Simplify your day"
+  (click)="presentActionSheet()"
+></app-button>
 </div>

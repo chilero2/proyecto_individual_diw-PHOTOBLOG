@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostServiceService } from '../../post-service.service';
+import { User } from '../../interfaces/users';
 
 @Component({
   selector: 'app-your-friends',
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YourFriendsComponent implements OnInit {
 
-  constructor() { }
+  friends:User[] = []
 
-  ngOnInit() {}
+  constructor(private postService: PostServiceService) { }
+
+
+
+  
+
+  ngOnInit() {
+    this.postService.getFriends(this.postService.getToken()).subscribe((data: User[]) => {
+      this.friends = data
+    })
+  }
 
 }

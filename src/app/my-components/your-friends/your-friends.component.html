@@ -3,5 +3,21 @@
     <h2>Your Friends</h2>
     <span>You do not have any friends yet</span>
   </div>
-  <div></div>
+  <div class="container">
+    <div *ngFor="let friend of friends">
+      <ion-avatar>
+        <img
+          *ngIf="friend.imgProfile === ''"
+          [alt]="friend.userName"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+        <img
+          *ngIf="friend.imgProfile !== ''"
+          [alt]="friend.userName"
+          [src]="friend.imgProfile"
+        />
+      </ion-avatar>
+      <small>{{ friend.userName }}</small>
+    </div>
+  </div>
 </div>

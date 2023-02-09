@@ -18,7 +18,8 @@ export class TodayComponent implements OnInit {
   @Input() title: string;
   result: string;
   images: Image[] = [];
-  image: Image | undefined
+  imagesUser: Image[] = [];
+
 
   constructor(
     private actionSheetCtrl: ActionSheetController,
@@ -30,9 +31,8 @@ export class TodayComponent implements OnInit {
     this.title = '';
     this.result = '';
   }
-  async ngOnInit() {
+  async ngOnInit() {    
     await this.loadFiles();
-    this.image = await this.showImage()
   }
 
   async loadFiles() {
@@ -48,10 +48,6 @@ export class TodayComponent implements OnInit {
       .then(
         (res) => {
           this.loadingFileData(res.files);
-          this.image = this.showImage()
-          
-          
-
         },
         async (err) => {
           await Filesystem.mkdir({
@@ -112,16 +108,6 @@ export class TodayComponent implements OnInit {
 
     await actionSheet.present();
   }
-
- showImage() {
-    for(const image of this.images) {
-      if(image.user_id ===  this.postService.getToken())
-        return image
-    }
-    return 
-  }
-
-
 
   camera() {
     this.cameraService.addNewToGallery().then((res) => {
