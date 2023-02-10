@@ -9,16 +9,16 @@
       <ion-avatar>
         <img
           *ngIf="friend.imgProfile === ''"
-          [alt]="friend.userName"
+          [alt]="friend.username"
           src="https://ionicframework.com/docs/img/demos/avatar.svg"
         />
         <img
           *ngIf="friend.imgProfile !== ''"
-          [alt]="friend.userName"
+          [alt]="friend.username"
           [src]="friend.imgProfile"
         />
       </ion-avatar>
-      <small>@{{ friend.userName }}</small>
+      <small>@{{ friend.username }}</small>
     </ion-slide>
   </ion-slides>
 </div>

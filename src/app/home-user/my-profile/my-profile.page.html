@@ -9,12 +9,85 @@
           <img src="/assets/images/carmen.jpg" alt="" />
         </ion-avatar>
       </div>
-      <div class="card-content">
-        <p>Carmen Ortiz</p>
-        <p>carmen@carmen</p>
+      <div *ngIf="!form" class="card-content">
+        <p>{{user?.username}}</p>
+        <p>{{user?.email}}</p>
+        <div *ngIf="!form" class="card-button">
+          <app-button
+            texto="Change Profile"
+            [lime]="true"
+            (click)="showForm()"
+          ></app-button>
+        </div>
       </div>
-      <div class="card-button">
-        <app-button texto="Change Profile" [lime]="true"></app-button>
+      <div *ngIf="form" class="card-content">
+        <form [formGroup]="formUser">
+          <ion-grid class="ion-no-padding">
+            <div class="inputs">
+              <ion-row class="ion-justify-content-between ion-no-padding">
+                <ion-input
+                  color="dark"
+                  placeholder="{{user?.username}}"
+                  formControlName="email"
+                  type="email"
+                  class="input ion-margin-bottom"
+                ></ion-input>
+              </ion-row>
+              <ion-row
+                class="ion-justify-content-between ion-no-padding"
+                color="dark"
+              >
+                <ion-input
+                  color="dark"
+                  formControlName="password"
+                  type="email"
+                  placeholder="{{user?.email}}"
+                  class="input ion-margin-bottom"
+                ></ion-input>
+              </ion-row>
+              <ion-row
+                class="ion-justify-content-between ion-no-padding"
+                color="dark"
+              >
+                <ion-input
+                  color="dark"
+                  formControlName="password"
+                  type="password"
+                  placeholder="****"
+                  class="input ion-margin-bottom"
+                ></ion-input>
+              </ion-row>
+              <ion-row
+                class="ion-justify-content-between ion-no-padding"
+                color="dark"
+              >
+                <ion-input
+                  color="dark"
+                  formControlName="password"
+                  type="password"
+                  placeholder="****"
+                  class="input ion-margin-bottom"
+                ></ion-input>
+              </ion-row>
+
+            </div>
+            
+            <ion-row class="ion-justify-content-between ion-no-padding">
+              <div class="buttons">
+                <app-button
+                  texto="Cancel"
+                  (click)="showForm()"
+                  [lime]="true"
+                ></app-button>
+                <app-button
+                  texto="Save"
+                  (click)="saveUser()"
+                  [lime]="true"
+                ></app-button>
+              </div>
+            </ion-row>
+          </ion-grid>
+        </form>
       </div>
     </div>
   </div>

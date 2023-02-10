@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     const data = this.formLogin.value
     const user: User = {
       id: '',
-      userName: '',
+      username: '',
       email: data.email,
       password: data.password,
       imgProfile: ''

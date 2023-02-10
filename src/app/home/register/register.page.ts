@@ -76,7 +76,7 @@ export class RegisterPage implements OnInit {
 
     const user: User = {
       id: id,
-      userName: data.username,
+      username: data.username,
       email: data.email,
       password: data.password,
       imgProfile: ''
