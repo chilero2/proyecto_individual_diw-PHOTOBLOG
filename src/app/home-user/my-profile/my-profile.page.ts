@@ -126,11 +126,3 @@ export class MyProfilePage implements OnInit {
 }
 
 
-// const picture: Image = {
-//   id: uuidv4(),
-//   comment: '',
-//   name: `_profile${new Date().getTime()}.jpg`,
-//   date: DateTime.now().toLocaleString(),
-//   url: data,
-//   user_id: this.postService.getToken()
-// }

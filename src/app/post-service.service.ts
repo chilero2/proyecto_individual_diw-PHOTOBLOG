@@ -8,6 +8,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Image } from './interfaces/images';
 import { HexBase64BinaryEncoding } from 'crypto';
+import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class PostServiceService {
     private alertController: AlertController
   ) { }
 
+  // USERS
   auth(user: User): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}users?email=${user.email}`);
   }
@@ -47,6 +49,8 @@ export class PostServiceService {
     return this.http.put<User>(`${this.url}users/${user.id}`, user)
   }
 
+  // IMAGES
+
   saveImageProfile(picture: string, id: string): Observable<string> {
     const body = {
       "imgProfile": picture
@@ -59,10 +63,6 @@ export class PostServiceService {
     })
   }
 
-
-
-
-
   getImage(idUser: string) {
     return this.http
       .get<Image[]>(`${this.url}images?user_id=${idUser}`)
@@ -73,6 +73,26 @@ export class PostServiceService {
     return this.http
       .get<Image[]>(`${this.url}images?id=${idImage}`)
       .pipe(map((res) => res[0]));
+  }
+
+  addImage(picture: Image): Observable<Image> {
+    return this.http.post<Image>(`${this.url}images`, picture, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    })
+  }
+  modifyPicture(picture: Image, id: string): Observable<Image> {
+    return this.http.put<Image>(`${this.url}images/${id}`, picture)
+  }
+
+  getTodayPicture(): Observable<Image> {
+    const today = DateTime.now().toFormat('yyyy-LL-dd')
+    const user_id = this.getToken()
+    this.http.get(`${this.url}images?date=${today}&?user_id=${user_id}`)
+    return this.http
+      .get<Image[]>(`${this.url}images?date=${today}&user_id=${user_id}`)
+      .pipe(map((res) => res[0]))
   }
 
 

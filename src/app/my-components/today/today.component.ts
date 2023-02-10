@@ -8,6 +8,7 @@ import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { readFile } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import { Photo } from '@capacitor/camera';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-today',
@@ -17,6 +18,7 @@ import { Photo } from '@capacitor/camera';
 export class TodayComponent implements OnInit {
   @Input() title: string;
   result: string;
+  todayImage: Image | undefined;
   images: Image[] = [];
   imagesUser: Image[] = [];
 
@@ -32,33 +34,10 @@ export class TodayComponent implements OnInit {
     this.result = '';
   }
   async ngOnInit() {
-    await this.loadFiles();
-  }
 
-  async loadFiles() {
-    this.images = [];
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading Data...',
-    });
-    await loading.present();
-    Filesystem.readdir({
-      directory: Directory.Data,
-      path: this.cameraService.PHOTO_STORAGE,
+    await this.postService.getTodayPicture().subscribe(data => {
+      this.todayImage = data
     })
-      .then(
-        (res) => {
-          this.loadingFileData(res.files);
-        },
-        async (err) => {
-          await Filesystem.mkdir({
-            directory: Directory.Data,
-            path: this.cameraService.PHOTO_STORAGE,
-          });
-        }
-      )
-      .then(() => {
-        loading.dismiss();
-      });
   }
 
   async loadingFileData(fileName: any[]) {
@@ -111,21 +90,28 @@ export class TodayComponent implements OnInit {
 
   camera() {
     this.cameraService.addNewToGallery().then((res) => {
-      this.savePicture(res);
-    });
-  }
+      const base64Data = this.cameraService.readAsBase64(res)
+      base64Data.then(data => {
+        const picture: Image = {
+          id: uuidv4(),
+          name: `${new Date().getTime()}.jpg`,
+          user_id: this.postService.getToken(),
+          date: DateTime.now().toFormat('yyyy-LL-dd'),
+          url: data,
+          comment: '',
+        }
+        this.postService.getTodayPicture().subscribe(data => {
 
-  async savePicture(cameraPhoto: Photo) {
-    //Convertir la foto a formato base64
-    const base64Data = await this.cameraService.readAsBase64(cameraPhoto);
+          data ? this.postService.modifyPicture(picture, data.id).subscribe(data => {
+            this.todayImage = data
+          }) :
+            this.postService.addImage(picture).subscribe(data => {
+              this.todayImage = data
+            })
+        })
 
-    //Escribir la foto en el directorio
-    const fileName = new Date().getTime() + '.jpg';
-    const img = await Filesystem.writeFile({
-      directory: Directory.Data,
-      path: `${this.cameraService.PHOTO_STORAGE}/${fileName}`,
-      data: base64Data,
+      })
+
     });
-    this.loadFiles();
   }
 }

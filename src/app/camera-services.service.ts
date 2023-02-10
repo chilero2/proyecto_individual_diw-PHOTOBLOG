@@ -52,26 +52,4 @@ export class CameraServicesService {
     reader.readAsDataURL(blob)
   })
 
-  /**
- * Resize a base 64 Image
- * @param {String} base64 - The base64 string (must include MIME type)
- * @param {Number} newWidth - The width of the image in pixels
- * @param {Number} newHeight - The height of the image in pixels
- */
-  resizeBase64Img(base64: string, newWidth: number, newHeight: number): Promise<string> {
-    return new Promise((resolve, reject) => {
-      var canvas = document.createElement("canvas");
-      canvas.style.width = newWidth.toString() + "px";
-      canvas.style.height = newHeight.toString() + "px";
-      let context = canvas.getContext("2d");
-      let img = document.createElement("img");
-      img.src = base64;
-      img.onload = () => {
-        context!.scale(newWidth / img.width, newHeight / img.height);
-        context!.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL());
-      }
-    })
-  }
-
 }
