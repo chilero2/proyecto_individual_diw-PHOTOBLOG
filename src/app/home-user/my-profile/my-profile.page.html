@@ -28,7 +28,8 @@
                 <ion-input
                   color="dark"
                   placeholder="{{user?.username}}"
-                  formControlName="email"
+                  formControlName="username"
+                  [value]="user?.username"
                   type="email"
                   class="input ion-margin-bottom"
                 ></ion-input>
@@ -39,8 +40,9 @@
               >
                 <ion-input
                   color="dark"
-                  formControlName="password"
+                  formControlName="email"
                   type="email"
+                  [value]="user?.email"
                   placeholder="{{user?.email}}"
                   class="input ion-margin-bottom"
                 ></ion-input>
@@ -53,6 +55,7 @@
                   color="dark"
                   formControlName="password"
                   type="password"
+                  [value]="user?.password"
                   placeholder="****"
                   class="input ion-margin-bottom"
                 ></ion-input>
@@ -63,15 +66,15 @@
               >
                 <ion-input
                   color="dark"
-                  formControlName="password"
+                  formControlName="password2"
                   type="password"
+                  [value]="user?.password"
                   placeholder="****"
                   class="input ion-margin-bottom"
                 ></ion-input>
               </ion-row>
-
             </div>
-            
+
             <ion-row class="ion-justify-content-between ion-no-padding">
               <div class="buttons">
                 <app-button

@@ -15,7 +15,8 @@ export class PostServiceService {
   logged = false;
 
   // url = 'http://192.168.8.101:3000/'
-  url = 'http://localhost:3000/';
+  url = 'http://172.29.228.146:3000/'
+  // url = 'http://localhost:3000/';
 
   constructor(
     private cookies: CookieService,
@@ -39,6 +40,10 @@ export class PostServiceService {
         'Content-Type': 'application/json',
       }),
     });
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.url}users/${user.id}`, user)
   }
 
   getImage(idUser: string) {
