@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { User } from '../../interfaces/users';
 import { PostServiceService } from '../../post-service.service';
+import { CameraServicesService } from '../../camera-services.service';
+import { Image } from '../../interfaces/images';
+import { v4 as uuidv4 } from 'uuid';
+import { DateTime } from 'luxon';
+
 
 @Component({
   selector: 'app-my-profile',
@@ -20,9 +25,10 @@ export class MyProfilePage implements OnInit {
     private alertController: AlertController,
     public postService: PostServiceService,
     private route: Router,
-    public navCtr: NavController) { }
+    public navCtr: NavController,
+    private cameraServices: CameraServicesService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.postService.getUser(this.postService.getToken()).subscribe(data => {
       this.user = data
     })
@@ -30,12 +36,12 @@ export class MyProfilePage implements OnInit {
   }
 
   showForm() {
-    this.form = !this.form
+    this.formUser.reset()
     this.postService.getUser(this.postService.getToken()).subscribe(data => {
       this.user = data
     })
-    // TODO resetar formulario
-
+    this.formUser = this.buildForm()
+    this.form = !this.form
   }
 
   buildForm(): FormGroup {
@@ -71,20 +77,35 @@ export class MyProfilePage implements OnInit {
     }
   }
 
-  saveUser() {
-    if(this.formUser.invalid) {
-      return this.presentAlert('You must complete all fields')
+  async saveUser() {
+    if (this.formUser.invalid) {
+      return await this.presentAlert('You must complete all fields')
     }
     const data = this.formUser.value
-    const user : User = {
+    const user: User = {
       id: this.user!.id,
       username: data.username === '' ? this.user?.username : data.username,
       email: data.email === '' ? this.user?.email : data.email,
       password: data.password === '' ? this.user?.password : data.password,
       imgProfile: this.user?.imgProfile
     }
-    this.postService.updateUser(user).subscribe() 
-    return this.showForm()
+    await this.postService.updateUser(user).subscribe(() => {
+      return this.showForm()
+    })
+  }
+
+
+  async updatePhoto() {
+    await this.cameraServices.addNewToGallery().then((res) => {
+      const base64Data = this.cameraServices.readAsBase64(res)
+      base64Data.then(data => {
+        const id = this.postService.getToken()
+        this.postService.saveImageProfile(data, id).subscribe(() => {
+          return this.showForm()
+        })
+      })
+    })
+
   }
 
   async presentAlert(message: string) {
@@ -103,3 +124,13 @@ export class MyProfilePage implements OnInit {
   }
 
 }
+
+
+// const picture: Image = {
+//   id: uuidv4(),
+//   comment: '',
+//   name: `_profile${new Date().getTime()}.jpg`,
+//   date: DateTime.now().toLocaleString(),
+//   url: data,
+//   user_id: this.postService.getToken()
+// }

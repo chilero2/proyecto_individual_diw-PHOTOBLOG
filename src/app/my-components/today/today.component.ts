@@ -31,7 +31,7 @@ export class TodayComponent implements OnInit {
     this.title = '';
     this.result = '';
   }
-  async ngOnInit() {    
+  async ngOnInit() {
     await this.loadFiles();
   }
 
@@ -121,7 +121,6 @@ export class TodayComponent implements OnInit {
 
     //Escribir la foto en el directorio
     const fileName = new Date().getTime() + '.jpg';
-    console.log(`${this.cameraService.PHOTO_STORAGE}/${fileName}`);
     const img = await Filesystem.writeFile({
       directory: Directory.Data,
       path: `${this.cameraService.PHOTO_STORAGE}/${fileName}`,

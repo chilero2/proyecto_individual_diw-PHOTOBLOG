@@ -13,9 +13,11 @@ export class ButtonComponent implements OnInit {
   @Input() lime: boolean
 
 
+
   constructor() {
     this.texto = ''
     this.lime = false
+
 
   }
 

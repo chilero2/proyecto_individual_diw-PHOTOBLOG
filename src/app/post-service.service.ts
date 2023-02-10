@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { catchError, map, Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Image } from './interfaces/images';
+import { HexBase64BinaryEncoding } from 'crypto';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,8 @@ import { Image } from './interfaces/images';
 export class PostServiceService {
   logged = false;
 
-  // url = 'http://192.168.8.101:3000/'
-  url = 'http://172.29.228.146:3000/'
+  url = 'http://192.168.8.101:3000/'
+  // url = 'http://172.29.228.146:3000/'
   // url = 'http://localhost:3000/';
 
   constructor(
@@ -23,7 +24,7 @@ export class PostServiceService {
     public http: HttpClient,
     private route: Router,
     private alertController: AlertController
-  ) {}
+  ) { }
 
   auth(user: User): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}users?email=${user.email}`);
@@ -31,7 +32,7 @@ export class PostServiceService {
 
   getUser(user_id: String): Observable<User> {
     return this.http.get<User[]>(`${this.url}users?id=${user_id}`)
-    .pipe(map((res) => res[0]));
+      .pipe(map((res) => res[0]));
   }
 
   addUser(user: User): Observable<User> {
@@ -46,6 +47,22 @@ export class PostServiceService {
     return this.http.put<User>(`${this.url}users/${user.id}`, user)
   }
 
+  saveImageProfile(picture: string, id: string): Observable<string> {
+    const body = {
+      "imgProfile": picture
+    }
+    return this.http.patch<string>(`${this.url}users/${id}`,
+      JSON.stringify(body), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    })
+  }
+
+
+
+
+
   getImage(idUser: string) {
     return this.http
       .get<Image[]>(`${this.url}images?user_id=${idUser}`)
@@ -57,6 +74,8 @@ export class PostServiceService {
       .get<Image[]>(`${this.url}images?id=${idImage}`)
       .pipe(map((res) => res[0]));
   }
+
+
 
   getFriends(idUser: string) {
     return this.http.get<User[]>(`${this.url}users?id_ne=${idUser}`);

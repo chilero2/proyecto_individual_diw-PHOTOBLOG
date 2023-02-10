@@ -13,9 +13,6 @@ import { Platform } from '@ionic/angular';
   providedIn: 'root'
 })
 export class CameraServicesService {
-
-
-
   // public photo!: Image
   public PHOTO_STORAGE: string = 'fotos'
 
@@ -31,40 +28,7 @@ export class CameraServicesService {
       saveToGallery: true,
     })
     return fotoCapturada
-
-    // if (fotoCapturada) {
-    //   await this.savePicture(fotoCapturada)
-    // this.photo = savedImageFile
   }
-  // Preferences.set({
-  //   key: this.PHOTO_STORAGE,
-  //   value: JSON.stringify(this.photo)
-  // })
-  // }
-
-  // public async savePicture(cameraPhoto: Photo) {
-  //   //Convertir la foto a formato base64
-  //   const base64Data = await this.readAsBase64(cameraPhoto)
-
-  //   //Escribir la foto en el directorio
-  //   const fileName = new Date().getTime() + '.jpg'
-  //   console.log(`${this.PHOTO_STORAGE}/${fileName}`)
-  //   await Filesystem.writeFile({
-  //     directory: Directory.Data,
-  //     path: `${this.PHOTO_STORAGE}/${fileName}`,
-  //     data: base64Data,
-  //   })
-
-  // return {
-  //   id: uuidv4(),
-  //   name: fileName,
-  //   user_id: user,
-  //   url: cameraPhoto.webPath || '',
-  //   date: new Date().toLocaleDateString('en-US'),
-  //   comment: ''
-  // }
-
-  // }
 
   public async readAsBase64(cameraPhoto: Photo) {
     // Convertir de blog a base 64
@@ -88,27 +52,26 @@ export class CameraServicesService {
     reader.readAsDataURL(blob)
   })
 
+  /**
+ * Resize a base 64 Image
+ * @param {String} base64 - The base64 string (must include MIME type)
+ * @param {Number} newWidth - The width of the image in pixels
+ * @param {Number} newHeight - The height of the image in pixels
+ */
+  resizeBase64Img(base64: string, newWidth: number, newHeight: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      var canvas = document.createElement("canvas");
+      canvas.style.width = newWidth.toString() + "px";
+      canvas.style.height = newHeight.toString() + "px";
+      let context = canvas.getContext("2d");
+      let img = document.createElement("img");
+      img.src = base64;
+      img.onload = () => {
+        context!.scale(newWidth / img.width, newHeight / img.height);
+        context!.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL());
+      }
+    })
+  }
 
-
-  // public async loadSave() {
-  //   // Recuperar las fotos de la cache
-  //   const listaFotos = await Preferences.get({
-  //     key: this.PHOTO_STORAGE
-  //   })
-  //   this.photo = JSON.parse(listaFotos.value!) || []
-
-  //   // Desplejar las fotos leidas en formato base64
-  //   // for (let foto of this.photos) {
-  //   // leer cada foto almacenada en el sistema de archivos
-  //   const readfile = await Filesystem.readFile({
-  //     path: this.photo.name,
-  //     directory: Directory.Data
-  //   })
-
-
-  //   // Sólo para plataformas web: cargar las fotos en base 64
-  //   this.photo.url = `data:image/jpg;base64,${readfile.data}`
-
-  // }
 }
-// }

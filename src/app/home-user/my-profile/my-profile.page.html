@@ -5,14 +5,14 @@
     <div class="card">
       <div class="card-header">
         <h2>My Profile</h2>
-        <ion-avatar>
-          <img src="/assets/images/carmen.jpg" alt="" />
+        <ion-avatar *ngIf="(user?.imgProfile !== '')">
+          <img [src]="user?.imgProfile" alt="{{user?.username}}" />
         </ion-avatar>
       </div>
       <div *ngIf="!form" class="card-content">
         <p>{{user?.username}}</p>
         <p>{{user?.email}}</p>
-        <div *ngIf="!form" class="card-button">
+        <div class="card-button">
           <app-button
             texto="Change Profile"
             [lime]="true"
@@ -74,6 +74,16 @@
                 ></ion-input>
               </ion-row>
             </div>
+
+            <ion-row class="ion-justify-content-between ion-no-padding">
+              <div class="buttons update">
+                <app-button
+                  texto="Update Profile Picture"
+                  (click)="updatePhoto()"
+                  [lime]="true"
+                ></app-button>
+              </div>
+            </ion-row>
 
             <ion-row class="ion-justify-content-between ion-no-padding">
               <div class="buttons">
