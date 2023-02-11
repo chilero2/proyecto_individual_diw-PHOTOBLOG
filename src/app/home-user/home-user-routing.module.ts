@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'my-profile',
     loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfilePageModule)
+  },
+  {
+    path: 'my-story',
+    loadChildren: () => import('./my-story/my-story.module').then(m => m.MyStoryPageModule)
   }
 ];
 

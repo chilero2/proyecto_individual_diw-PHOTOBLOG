@@ -26,6 +26,9 @@ export class NavComponent implements OnInit {
   goProfile() {
     this.navCntl.navigateForward('home-user/my-profile')
   }
+  goStory() {
+    this.navCntl.navigateForward('home-user/my-story')
+  }
 
 
 
