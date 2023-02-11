@@ -28,4 +28,9 @@ ion-slide {
     font-style: italic;
     color: var(--ion-color-medium);
   }
+
+  & .img {
+    width: 4rem;
+    height: 4rem;
+  }
 }

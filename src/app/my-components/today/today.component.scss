@@ -26,6 +26,11 @@
   & .images {
     align-self: center;
   }
+
+  & p {
+    color: var(--ion-color-text-high);
+    font-style: italic;
+    font-weight: 700;
+    text-align: center;
+  }
 }
-
-

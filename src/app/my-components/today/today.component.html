@@ -3,10 +3,11 @@
     <h2>Your Today</h2>
     <span *ngIf="!todayImage">You still haven't summed up the day</span>
   </div>
-  <div class="container">
-    <ion-card *ngIf="todayImage" class="images" (click)="showTodayImg()">
+  <div *ngIf="todayImage" class="container">
+    <ion-card class="images" (click)="showTodayImg()">
       <ion-img [src]="todayImage.url" alt="{{ todayImage.name }}"></ion-img>
     </ion-card>
+    <p *ngIf="todayImage.comment !== ''">"{{ todayImage.comment }}"</p>
   </div>
   <app-button
     texto="Simplify your day"
