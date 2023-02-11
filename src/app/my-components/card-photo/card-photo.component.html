@@ -3,9 +3,9 @@
     <span>{{ convertDate() }}</span>
   </ion-card-header>
 
-  <ion-card-content>
-    <img [src]="linkImg()" [alt]="nameImg" />
-    <p>"{{ commentImg() }}"</p>
+  <ion-card-content *ngIf="image">
+    <img [src]="linkImg()" alt="{{ image.name }}" />
+    <p *ngIf="image.comment !== ''">"{{ commentImg() }}"</p>
     <app-button texto="Volver" (click)="back()"></app-button>
   </ion-card-content>
 </ion-card>

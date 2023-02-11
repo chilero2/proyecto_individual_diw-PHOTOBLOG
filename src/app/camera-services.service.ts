@@ -6,12 +6,10 @@ import { Image } from './interfaces/images';
 import { v4 as uuidv4 } from 'uuid';
 import { Platform } from '@ionic/angular';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class CameraServicesService {
   // public photo!: Image
   public PHOTO_STORAGE: string = 'fotos'

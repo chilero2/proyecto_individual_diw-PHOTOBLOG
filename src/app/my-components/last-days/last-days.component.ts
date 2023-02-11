@@ -18,9 +18,8 @@ export class LastDaysComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.user = this.postServiceService.getToken()
-    this.postServiceService.getImage(this.user).subscribe(data => {
+    this.postServiceService.getImageLastDays(this.user).subscribe(data => {
       this.images = data
     })
   }
@@ -31,7 +30,8 @@ export class LastDaysComponent implements OnInit {
   }
 
   getUrl(url: string) {
-    return `./assets/images/${url}`
+    if (url.length < 50) return `./assets/images/${url}`
+    return url
   }
 
 

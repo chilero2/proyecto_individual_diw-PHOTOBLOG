@@ -18,10 +18,10 @@ export class CardPhotoComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.activeRoute.snapshot.paramMap.get('id')
     if (id) {
-      this.postService.getImagePerId(id).subscribe(res => {
+      await this.postService.getImagePerId(id).subscribe(res => {
         this.image = res
       }
       )
@@ -45,7 +45,8 @@ export class CardPhotoComponent implements OnInit {
   }
 
   linkImg(): string {
-    return 'assets/images/' + this.image?.url
+    if (this.image.url.length < 50) return 'assets/images/' + this.image?.url
+    return this.image?.url
   }
 
   nameImg(): string {

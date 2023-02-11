@@ -75,6 +75,13 @@ export class PostServiceService {
       .pipe(map((res) => res[0]));
   }
 
+  getImageLastDays(idUser: string) {
+    const today = DateTime.now().toFormat('yyyy-LL-dd')
+    return this.http
+      .get<Image[]>(`${this.url}images?user_id=${idUser}&date_ne=${today}`)
+      .pipe(map((res: Image[]) => res));
+  }
+
   addImage(picture: Image): Observable<Image> {
     return this.http.post<Image>(`${this.url}images`, picture, {
       headers: new HttpHeaders({
