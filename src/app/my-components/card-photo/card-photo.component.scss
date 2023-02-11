@@ -1,7 +1,6 @@
 ion-card {
   box-shadow: none;
 
-
   &.container {
     margin: 0 0 1rem;
   }
@@ -21,9 +20,16 @@ ion-card {
     }
 
     & p {
-        text-align: center;
-        font-style: italic;
-        margin: .5rem 0;
+      text-align: center;
+      font-style: italic;
+      margin: 0.5rem 0;
     }
+  }
+
+  & .form-button {
+    display: flex;
+    justify-content: center;
+
+    margin: 1.5rem 0 3rem;
   }
 }

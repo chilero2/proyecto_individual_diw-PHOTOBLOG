@@ -89,8 +89,21 @@ export class PostServiceService {
       }),
     })
   }
+
   modifyPicture(picture: Image, id: string): Observable<Image> {
     return this.http.put<Image>(`${this.url}images/${id}`, picture)
+  }
+
+  addComment(image_id: string, comment: string): Observable<string> {
+    const body = {
+      'comment': comment
+    }
+    return this.http.patch<string>(`${this.url}images/${image_id}`,
+      JSON.stringify(body), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    })
   }
 
   getTodayPicture(): Observable<Image> {

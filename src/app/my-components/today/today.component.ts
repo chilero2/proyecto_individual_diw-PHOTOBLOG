@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActionSheetController, LoadingController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController } from '@ionic/angular';
 import { PostServiceService } from '../../post-service.service';
 import { Router } from '@angular/router';
 import { CameraServicesService } from '../../camera-services.service';
@@ -9,6 +9,7 @@ import { readFile } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import { Photo } from '@capacitor/camera';
 import { DateTime } from 'luxon';
+import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-today',
@@ -26,9 +27,9 @@ export class TodayComponent implements OnInit {
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private postService: PostServiceService,
-    private route: Router,
     private cameraService: CameraServicesService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private navCtrl: NavController
   ) {
     this.title = '';
     this.result = '';
@@ -113,5 +114,10 @@ export class TodayComponent implements OnInit {
       })
 
     });
+  }
+
+  showTodayImg() {
+    const url = `/home-user/image/${this.todayImage?.id}`
+    this.navCtrl.navigateForward(url, { replaceUrl: true })
   }
 }

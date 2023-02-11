@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormsModule, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
-import { randomBytes, randomInt } from 'crypto';
 import { User } from 'src/app/interfaces/users';
 import { PostServiceService } from 'src/app/post-service.service';
-import { HomeUserPageRoutingModule } from '../../home-user/home-user-routing.module';
 import { v4 as uuidv4 } from 'uuid'
-import { group } from 'console';
-import { Router } from '@angular/router';
-import { Users } from '../../interfaces/users';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +17,6 @@ export class RegisterPage implements OnInit {
   constructor(public formBuilder: FormBuilder,
     private alertController: AlertController,
     private postServices: PostServiceService,
-    private router: Router,
     public navCtr: NavController) {
 
 

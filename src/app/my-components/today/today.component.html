@@ -4,10 +4,7 @@
     <span *ngIf="!todayImage">You still haven't summed up the day</span>
   </div>
   <div class="container">
-    <!-- <ion-card class="images" *ngFor="let foto of images">
-      <ion-img [src]="foto.url" alt="{{ foto.name }}"></ion-img>
-    </ion-card> -->
-    <ion-card *ngIf="todayImage" class="images">
+    <ion-card *ngIf="todayImage" class="images" (click)="showTodayImg()">
       <ion-img [src]="todayImage.url" alt="{{ todayImage.name }}"></ion-img>
     </ion-card>
   </div>

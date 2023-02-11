@@ -5,7 +5,35 @@
 
   <ion-card-content *ngIf="image">
     <img [src]="linkImg()" alt="{{ image.name }}" />
-    <p *ngIf="image.comment !== ''">"{{ commentImg() }}"</p>
+    <div *ngIf="isToday()">
+      <form [formGroup]="formComment" *ngIf="showForm">
+        <ion-item>
+          <ion-textarea
+            placeholder="Comment your day"
+            [autoGrow]="true"
+            formControlName="comment"
+          >
+          </ion-textarea>
+        </ion-item>
+        <div class="form-button">
+          <app-button
+            texto="Save Comment"
+            [lime]="true"
+            (click)="addComment()"
+          ></app-button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="!showForm">
+      <p>"{{ commentImg() }}"</p>
+      <div *ngIf="isToday()" class="form-button">
+        <app-button
+          texto="Change Comment"
+          [lime]="true"
+          (click)="showForm = !showForm"
+        ></app-button>
+      </div>
+    </div>
     <app-button texto="Volver" (click)="back()"></app-button>
   </ion-card-content>
 </ion-card>
