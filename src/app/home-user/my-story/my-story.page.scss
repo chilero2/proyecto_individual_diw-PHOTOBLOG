@@ -1,3 +1,7 @@
+.page {
+  min-height: 75vh;
+}
+
 ion-card {
   box-shadow: none;
 
@@ -25,4 +29,12 @@ ion-card {
       margin: 0.5rem 0 1rem;
     }
   }
+}
+
+div.noPictures {
+  text-align: center;
+  margin: 4rem 0;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: #222428;
 }

@@ -1,34 +1,49 @@
 <ion-content [fullscreen]="true">
   <app-nav></app-nav>
-
-  <ion-list>
-    <ion-item>
-      <ion-select placeholder="Select Month">
-        <ion-select-option *ngFor="let month of months" value="{{month}}"
-          >{{month}}</ion-select-option
+  <div class="page">
+    <ion-list>
+      <ion-item>
+        <ion-select
+          (ionChange)="handleChange($event)"
+          placeholder="Select Month"
+          okText="Search"
+          id="months"
         >
-      </ion-select>
-      <ion-select placeholder="Select Year">
-        <ion-select-option *ngFor="let year of years" value="{{year}}"
-          >{{year}}</ion-select-option
+          <ion-select-option *ngFor="let month of months" [value]="month"
+            >{{month}}</ion-select-option
+          >
+        </ion-select>
+        <ion-select
+          (ionChange)="handleChange($event)"
+          placeholder="Select Year"
+          okText="Search"
+          id="years"
         >
-      </ion-select>
-    </ion-item>
-  </ion-list>
-
-  <ion-card *ngFor="let image of images" class="container ion-no-border">
-    <ion-card-header>
-      <span>{{ convertDate(image) }}</span>
-    </ion-card-header>
-    <ion-card-content class="container-content">
-      <ion-img
-        class="img"
-        src="{{linkImg(image)}}"
-        alt="{{image.name}}"
-      ></ion-img>
-      <p *ngIf="image.comment !== ''">"{{image.comment}}"</p>
-    </ion-card-content>
-  </ion-card>
+          <ion-select-option *ngFor="let year of years" value="{{year}}"
+            >{{year}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="images.length > 0">
+      <ion-card *ngFor="let image of images" class="container ion-no-border">
+        <ion-card-header>
+          <span>{{ convertDate(image) }}</span>
+        </ion-card-header>
+        <ion-card-content class="container-content">
+          <ion-img
+            class="img"
+            src="{{linkImg(image)}}"
+            alt="{{image.name}}"
+          ></ion-img>
+          <p *ngIf="image.comment !== ''">"{{image.comment}}"</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="noPictures" *ngIf="images.length === 0">
+      <span>You have no pictures on those date</span>
+    </div>
+  </div>
 
   <app-footer></app-footer>
 </ion-content>

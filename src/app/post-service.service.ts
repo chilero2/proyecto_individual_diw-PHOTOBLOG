@@ -82,6 +82,16 @@ export class PostServiceService {
       .pipe(map((res: Image[]) => res));
   }
 
+  getImagePerDate(idUser: string, month: string, year: string) {
+    const m = month === 'All Months' ? "\\d{2}" : DateTime.fromFormat(month, "LLLL").toFormat('LL')
+    const y = year === 'All Years' ? "\\d{4}" : year
+    return this.http
+      .get<Image[]>(`${this.url}images?user_id=${idUser}&date_like=${y}[-]${m}`)
+      .pipe(map((res: Image[]) => res));
+
+
+  }
+
   addImage(picture: Image): Observable<Image> {
     return this.http.post<Image>(`${this.url}images`, picture, {
       headers: new HttpHeaders({

@@ -10,14 +10,17 @@ import { PostServiceService } from 'src/app/post-service.service';
 })
 export class MyStoryPage implements OnInit {
 
+
   images: Image[] = []
-  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  years: string[] = []
+  months: string[] = ['All Months', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  years: string[] = ['All Years']
+  selectMonth: string = 'All Months'
+  selectYear: string = 'All Years'
 
   constructor(private postService: PostServiceService) { }
 
   async ngOnInit() {
-    await this.postService.getImage(this.postService.getToken()).subscribe(data => {
+    await this.postService.getImagePerDate(this.postService.getToken(), this.selectMonth, this.selectYear).subscribe(data => {
       this.images = data
       this.images.forEach(image => {
         const year = image.date.split('-')
@@ -33,6 +36,14 @@ export class MyStoryPage implements OnInit {
   linkImg(image: Image): string {
     if (!image.url.includes('base64')) return 'assets/images/' + image?.url
     return image?.url
+  }
+
+  async handleChange(e: any) {
+    e.target.id === 'months' ? this.selectMonth = e.detail.value : this.selectYear = e.detail.value
+    await this.postService.getImagePerDate(this.postService.getToken(), this.selectMonth, this.selectYear)
+      .subscribe(data => {
+        this.images = data
+      })
   }
 
 }

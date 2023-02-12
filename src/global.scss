@@ -25,12 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-// alert styles
-.custom-alert .alert-button-accept {
-  color: var(--ion-color-danger);
-  font-weight: 700;
-}
-
 // action sheet styles
 ion-action-sheet.sheet .action-sheet-group {
   background: var(--ion-color-secondary);
@@ -58,4 +52,60 @@ ion-action-sheet.sheet .action-sheet-cancel::after {
 ion-menu.menu ion-content {
   --background: var(--ion-color-secondary);
   color: var(--ion-color-high);
+}
+
+ion-select {
+  --placeholder-color: var(--ion-color-text-high);
+  --placeholder-opacity: 1;
+  width: 100%;
+  justify-content: center;
+
+  &::part(placeholder),
+  &::part(text) {
+    flex: 0 0 auto;
+  }
+
+  &::part(placeholder)::first-letter {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &::part(text) {
+    font-weight: 700;
+    color: var(--ion-color-text-high);
+  }
+  ion-select::part(icon) {
+    color: #971e49;
+    opacity: 1;
+  }
+}
+
+// alert styles
+ion-alert.custom-alert .alert-wrapper {
+  background-color: #222428;
+  .alert-title,
+  .alert-message {
+    color: var(--ion-color-text-high);
+  }
+}
+
+.custom-alert .alert-button-accept {
+  color: var(--ion-color-danger);
+  font-weight: 700;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+  color: var(--ion-color-text-high);
+}
+
+.alert-button-group.sc-ion-alert-md,
+.alert-button-group.sc-ion-alert-ios {
+  background-color: var(--ion-color-secondary);
+  display: flex;
+  justify-content: space-evenly;
+  color: red;
+  & button {
+    color: var(--ion-color-high);
+  }
 }
