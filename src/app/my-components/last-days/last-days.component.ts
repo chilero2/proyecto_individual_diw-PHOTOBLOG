@@ -30,7 +30,7 @@ export class LastDaysComponent implements OnInit {
   }
 
   getUrl(url: string) {
-    if (url.length < 50) return `./assets/images/${url}`
+    if (!url.includes('base64')) return `./assets/images/${url}`
     return url
   }
 

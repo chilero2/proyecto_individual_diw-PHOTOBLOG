@@ -72,7 +72,7 @@ export class CardPhotoComponent implements OnInit {
   }
 
   linkImg(): string {
-    if (this.image.url.length < 50) return 'assets/images/' + this.image?.url
+    if (!this.image.url.includes('base64')) return 'assets/images/' + this.image?.url
     return this.image?.url
   }
 
