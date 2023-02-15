@@ -16,8 +16,8 @@ import { DateTime } from 'luxon';
 export class PostServiceService {
   logged = false;
 
-  url = 'http://192.168.8.101:3000/'
-  // url = 'http://172.29.228.146:3000/'
+  // url = 'http://192.168.8.101:3000/'
+  url = 'http://172.29.228.146:3000/'
   // url = 'http://localhost:3000/';
 
   constructor(

@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'my-story',
     loadChildren: () => import('./my-story/my-story.module').then(m => m.MyStoryPageModule)
+  },  {
+    path: 'gifs',
+    loadChildren: () => import('./gifs/gifs.module').then( m => m.GifsPageModule)
   }
+
 ];
 
 @NgModule({

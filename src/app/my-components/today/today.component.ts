@@ -71,10 +71,10 @@ export class TodayComponent implements OnInit {
           },
         },
         {
-          text: 'Album',
-          data: {
-            action: 'share',
-          },
+          text: 'Gifs',
+          handler: () => {
+            this.goGifs()
+          }
         },
         {
           text: 'Cancel',
@@ -114,6 +114,10 @@ export class TodayComponent implements OnInit {
       })
 
     });
+  }
+
+  goGifs() {
+    this.navCtrl.navigateForward(`/home-user/gifs`, {replaceUrl:true})
   }
 
   showTodayImg() {
