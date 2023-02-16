@@ -1,8 +1,23 @@
 <ion-content [fullscreen]="true">
   <app-nav></app-nav>
-  
 
+  <ion-searchbar
+    color="secondary"
+    placeholder="Search Gif..."
+    (ionChange)="handleChange($event)"
+    debounce="1000"
+  ></ion-searchbar>
+
+  <div class="container">
+    <ion-card class="images" *ngFor="let gif of gifs">
+      <div (click)="presentAlert(gif)">
+        <ion-img
+          [src]="gif.images.downsized_medium.url"
+          [alt]="gif.title"
+        ></ion-img>
+      </div>
+    </ion-card>
+  </div>
 
   <app-footer></app-footer>
 </ion-content>
-

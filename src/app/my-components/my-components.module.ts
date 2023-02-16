@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
+
 @NgModule({
   declarations: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent, CardPhotoComponent],
   imports: [
@@ -26,12 +27,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule
-
-
-
-
-
-
 
   ],
   exports: [ButtonComponent, LogoComponent, TitleComponent, InputComponent, NavComponent, FooterComponent, TodayComponent, LastDaysComponent, YourFriendsComponent, CardPhotoComponent]

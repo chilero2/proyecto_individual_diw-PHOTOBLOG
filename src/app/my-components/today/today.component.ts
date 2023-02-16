@@ -35,7 +35,6 @@ export class TodayComponent implements OnInit {
     this.result = '';
   }
   async ngOnInit() {
-
     await this.postService.getTodayPicture().subscribe(data => {
       this.todayImage = data
     })
@@ -117,7 +116,7 @@ export class TodayComponent implements OnInit {
   }
 
   goGifs() {
-    this.navCtrl.navigateForward(`/home-user/gifs`, {replaceUrl:true})
+    this.navCtrl.navigateForward(`/home-user/gifs`, { replaceUrl: true })
   }
 
   showTodayImg() {

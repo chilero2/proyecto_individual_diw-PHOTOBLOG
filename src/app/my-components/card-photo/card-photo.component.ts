@@ -48,16 +48,14 @@ export class CardPhotoComponent implements OnInit {
     if (this.formComment.invalid) {
       return this.presentAlert()
     }
-
     const comment: string = this.formComment.value.comment
-    this.postService.addComment(this.image.id, comment).subscribe()
+    await this.postService.addComment(this.image.id, comment).subscribe()
     this.back()
   }
 
 
   back() {
-    this.navCtrl.navigateBack('/home-user', { replaceUrl: true })
-
+    this.navCtrl.navigateBack('/home-user')
   }
 
   loadImage() {
@@ -72,7 +70,7 @@ export class CardPhotoComponent implements OnInit {
   }
 
   linkImg(): string {
-    if (!this.image.url.includes('base64')) return 'assets/images/' + this.image?.url
+    if (this.image.url.includes('.jpg')) return 'assets/images/' + this.image?.url
     return this.image?.url
   }
 

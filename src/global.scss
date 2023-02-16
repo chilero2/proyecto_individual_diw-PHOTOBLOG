@@ -25,6 +25,13 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-loading.custom-loading {
+  --background: #222428;
+  --spinner-color: var(--ion-color-text-high);
+
+  color: var(--ion-color-text-high);
+}
+
 // action sheet styles
 ion-action-sheet.sheet .action-sheet-group {
   background: var(--ion-color-secondary);

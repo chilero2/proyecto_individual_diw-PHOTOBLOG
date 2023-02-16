@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="title">
-    <h2>Your Today</h2>
+    <h2>My Today</h2>
     <span *ngIf="!todayImage">You still haven't summed up the day</span>
   </div>
   <div *ngIf="todayImage" class="container">
@@ -10,7 +10,7 @@
     <p *ngIf="todayImage.comment !== ''">"{{ todayImage.comment }}"</p>
   </div>
   <app-button
-    texto="Simplify your day"
+    texto="Simplify my day"
     (click)="presentActionSheet()"
   ></app-button>
 </div>
