@@ -2,16 +2,16 @@
   <app-nav></app-nav>
 
   <ion-searchbar
+    *ngIf="!onlyFriend"
     color="secondary"
     placeholder="Search Gif..."
     (ionChange)="handleChange($event)"
     debounce="1000"
   ></ion-searchbar>
 
-  <div class="container">
-   <div *ngIf="!selectFriend">
-    <div class="images" *ngFor="let friend of friends" >
-      <ion-avatar (click) = "showFriend($event)">
+  <div *ngIf="!selectFriend" class="container">
+    <div class="images" *ngFor="let friend of friends">
+      <ion-avatar (click)="showFriend($event)">
         <img
           *ngIf="friend.imgProfile === ''"
           [alt]="friend.username"
@@ -24,12 +24,60 @@
           [src]="friend.imgProfile"
           class="img"
           attr.data-id="{{friend.id}}"
-         
         />
       </ion-avatar>
       <small>@{{ friend.username }}</small>
     </div>
   </div>
+
+  <div *ngIf="selectFriend" class="selectFriend">
+    <div class="selectFriend_header">
+      <h2>{{selectFriend.email}}</h2>
+      <div class="avatar">
+        <ion-avatar (click)="showFriend($event)">
+          <img
+            *ngIf="selectFriend.imgProfile === ''"
+            [alt]="selectFriend.username"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          />
+          <img
+            *ngIf="selectFriend.imgProfile !== ''"
+            [alt]="selectFriend.username"
+            [src]="selectFriend.imgProfile"
+            class="img"
+          />
+        </ion-avatar>
+        <small>@{{ selectFriend.username }}</small>
+      </div>
+    </div>
+    <div *ngIf="onlyFriend" class="onlyFriend">
+      <app-button
+        texto="Search other friends"
+        class="onlyFriend"
+        (click)="moreFriend()"
+      ></app-button>
+    </div>
+    <div *ngIf="imagesFriend.length > 0">
+      <ion-card
+        *ngFor="let image of imagesFriend"
+        class="selectFriend_card ion-no-border"
+      >
+        <ion-card-header>
+          <span>{{ convertDate(image) }}</span>
+        </ion-card-header>
+        <ion-card-content class="container-content">
+          <ion-img
+            class="img"
+            src="{{linkImg(image)}}"
+            alt="{{image.name}}"
+          ></ion-img>
+          <p *ngIf="image.comment !== ''">"{{image.comment}}"</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="noPictures" *ngIf="imagesFriend.length === 0">
+      <span>You have no pictures on those date</span>
+    </div>
   </div>
 
   <app-footer></app-footer>

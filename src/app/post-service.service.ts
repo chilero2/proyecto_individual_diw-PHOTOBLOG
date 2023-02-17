@@ -16,8 +16,8 @@ import { DateTime } from 'luxon';
 export class PostServiceService {
   logged = false;
 
-  // url = 'http://192.168.1.23:3000/'
-  url = 'http://172.29.228.146:3000/'
+  url = 'http://192.168.1.23:3000/'
+  // url = 'http://172.29.228.146:3000/'
   // url = 'http://localhost:3000/';
 
   constructor(
@@ -45,15 +45,19 @@ export class PostServiceService {
     });
   }
 
-  searchFriends(text: string) : Observable<User[]> {
-    const id = `id_ne=${this.getToken()}`  
+  searchFriends(text: string): Observable<User[]> {
+    const id = `id_ne=${this.getToken()}`
     const search = text === '' ? '' : `&username_like=${text}`
     return this.http.get<User[]>(`${this.url}users?${id}${search}`)
-    .pipe(map((res: User[]) => res))
+      .pipe(map((res: User[]) => res))
   }
 
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(`${this.url}users/${user.id}`, user)
+  }
+
+  getFriends(idUser: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}users?id_ne=${idUser}`);
   }
 
   // IMAGES
@@ -89,14 +93,18 @@ export class PostServiceService {
       .pipe(map((res: Image[]) => res));
   }
 
-  getImagePerDate(idUser: string, month: string, year: string) {
+  getImagePerDate(idUser: string, month: string, year: string): Observable<Image[]> {
     const m = month === 'All Months' ? "\\d{2}" : DateTime.fromFormat(month, "LLLL").toFormat('LL')
     const y = year === 'All Years' ? "\\d{4}" : year
     return this.http
       .get<Image[]>(`${this.url}images?user_id=${idUser}&date_like=${y}[-]${m}`)
       .pipe(map((res: Image[]) => res));
+  }
 
-
+  getAllImages(idUser: string): Observable<Image[]> {
+    return this.http
+      .get<Image[]>(`${this.url}images?user_id=${idUser}`)
+      .pipe(map((res: Image[]) => res));
   }
 
   addImage(picture: Image): Observable<Image> {
@@ -134,9 +142,7 @@ export class PostServiceService {
 
 
 
-  getFriends(idUser: string) {
-    return this.http.get<User[]>(`${this.url}users?id_ne=${idUser}`);
-  }
+
 
   setToken(token: string) {
     this.logged = true;

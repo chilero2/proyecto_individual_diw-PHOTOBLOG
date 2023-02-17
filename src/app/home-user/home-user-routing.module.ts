@@ -25,12 +25,17 @@ const routes: Routes = [
   },
   {
     path: 'gifs',
-    loadChildren: () => import('./gifs/gifs.module').then( m => m.GifsPageModule)
+    loadChildren: () => import('./gifs/gifs.module').then(m => m.GifsPageModule)
   },
   {
     path: 'friends',
-    loadChildren: () => import('./friends/friends.module').then( m => m.FriendsPageModule)
-  }
+    loadChildren: () => import('./friends/friends.module').then(m => m.FriendsPageModule)
+  },
+  {
+    path: 'friends/:id',
+    loadChildren: () => import('./friends/friends.module').then(m => m.FriendsPageModule)
+  },
+
 
 ];
 

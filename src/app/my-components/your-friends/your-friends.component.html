@@ -11,12 +11,16 @@
           *ngIf="friend.imgProfile === ''"
           [alt]="friend.username"
           src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          (click)="goFriend($event)"
+          attr.data-id="{{ friend.id }}"
         />
         <img
           *ngIf="friend.imgProfile !== ''"
           [alt]="friend.username"
           [src]="friend.imgProfile"
           class="img"
+          (click)="goFriend($event)"
+          attr.data-id="{{ friend.id }}"
         />
       </ion-avatar>
       <small>@{{ friend.username }}</small>

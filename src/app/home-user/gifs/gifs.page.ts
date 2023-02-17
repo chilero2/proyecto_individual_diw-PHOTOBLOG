@@ -42,9 +42,7 @@ export class GifsPage implements OnInit {
     })
   }
 
-  carga(event: any) {
-    console.log(event)
-  }
+
   async presentAlert(gif: Gif) {
     const alert = await this.alertController.create({
       header: 'This gif simplifies my day',

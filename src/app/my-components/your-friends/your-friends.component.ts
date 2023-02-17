@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostServiceService } from '../../post-service.service';
 import { User } from '../../interfaces/users';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
-import { IonicSlides } from '@ionic/angular';
+import { IonicSlides, NavController } from '@ionic/angular';
 
 SwiperCore.use([IonicSlides])
 
@@ -21,7 +21,7 @@ export class YourFriendsComponent implements OnInit {
 
   }
 
-  constructor(private postService: PostServiceService) { }
+  constructor(private postService: PostServiceService, private navCtrl: NavController) { }
 
 
 
@@ -31,6 +31,12 @@ export class YourFriendsComponent implements OnInit {
     this.postService.getFriends(this.postService.getToken()).subscribe((data: User[]) => {
       this.friends = data
     })
+  }
+
+  goFriend(event: Event) {
+    const id = (event.target as HTMLImageElement).dataset['id']
+    const url = `/home-user/friends/${id}`
+    this.navCtrl.navigateForward(url, { replaceUrl: true })
   }
 
 }
