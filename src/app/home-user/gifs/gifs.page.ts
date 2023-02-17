@@ -13,8 +13,6 @@ import { PostServiceService } from '../../post-service.service';
 })
 export class GifsPage implements OnInit {
 
-
-
   texto: string = ''
   gifs: Gif[] = []
 
@@ -27,22 +25,42 @@ export class GifsPage implements OnInit {
   ngOnInit() {
   }
 
+  // EVENTS + REQUEST
   async handleChange(event: any) {
     this.texto = event.detail.value
-    await this.loadingCtrl.create({
-      message: 'Loading...',
-      duration: 3000,
-      spinner: 'circles',
-      cssClass: 'custom-loading',
-    }).then((loading) => {
+    this.presentLoading('Loading...').then(() => {
       this.gifServices.buscarGifs(this.texto)?.subscribe(res => {
+        this.loadingCtrl.dismiss()
         this.gifs = res.data
       })
-      loading.present();
     })
   }
 
+  saveGif(gif: Gif) {
+    this.presentLoading('Saving...').then(() => {
+      const newImage: Image = {
+        id: gif.id,
+        name: `${gif.title}${new Date().getTime()}`,
+        user_id: this.postservice.getToken(),
+        url: gif.images.downsized_medium.url,
+        date: DateTime.now().toFormat('yyyy-LL-dd'),
+        comment: ''
+      }
+      this.postservice.getTodayPicture().subscribe(data => {
+        data ? this.postservice.modifyPicture(newImage, data.id).subscribe((data) => {
+          this.loadingCtrl.dismiss()
+          this.navCtrl.navigateBack('/home-user')
+        }) :
+          this.postservice.addImage(newImage).subscribe((data) => {
+            this.loadingCtrl.dismiss()
+            this.navCtrl.navigateBack('/home-user')
+          })
+      })
+    })
 
+  }
+
+  // ALERT
   async presentAlert(gif: Gif) {
     const alert = await this.alertController.create({
       header: 'This gif simplifies my day',
@@ -60,32 +78,19 @@ export class GifsPage implements OnInit {
         },
       ],
     });
-
     await alert.present();
   }
 
-
-
-  saveGif(gif: Gif) {
-
-    const newImage: Image = {
-      id: gif.id,
-      name: `${gif.title}${new Date().getTime()}`,
-      user_id: this.postservice.getToken(),
-      url: gif.images.downsized_medium.url,
-      date: DateTime.now().toFormat('yyyy-LL-dd'),
-      comment: ''
-    }
-    this.postservice.getTodayPicture().subscribe(data => {
-      data ? this.postservice.modifyPicture(newImage, data.id).subscribe((data) => {
-        this.navCtrl.navigateBack('/home-user')
-      }) :
-        this.postservice.addImage(newImage).subscribe((data) => {
-          this.navCtrl.navigateBack('/home-user')
-        })
+  // LOADING
+  async presentLoading(message: string) {
+    const loading = await this.loadingCtrl.create({
+      message,
+      spinner: 'circles',
+      cssClass: 'custom-loading',
     })
-
-
+    return await loading.present();
   }
 
 }
+
+

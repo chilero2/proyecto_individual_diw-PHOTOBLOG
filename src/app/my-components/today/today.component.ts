@@ -22,6 +22,7 @@ export class TodayComponent implements OnInit {
   todayImage: Image | undefined;
   images: Image[] = [];
   imagesUser: Image[] = [];
+  commentToday!: string
 
 
   constructor(
@@ -33,11 +34,42 @@ export class TodayComponent implements OnInit {
   ) {
     this.title = '';
     this.result = '';
+
   }
-  async ngOnInit() {
-    await this.postService.getTodayPicture().subscribe(data => {
-      this.todayImage = data
+  ngOnInit() {
+    this.presentLoading('Loading...').then(() => {
+      this.postService.getTodayPicture().subscribe(data => {
+        this.loadingCtrl.dismiss()
+        this.todayImage = data
+        this.commentToday = data.comment
+      })
     })
+  }
+
+  // PICTURES
+  camera() {
+    this.cameraService.addNewToGallery().then((res) => {
+      const base64Data = this.cameraService.readAsBase64(res)
+      base64Data.then(data => {
+        const picture: Image = {
+          id: uuidv4(),
+          name: `${new Date().getTime()}.jpg`,
+          user_id: this.postService.getToken(),
+          date: DateTime.now().toFormat('yyyy-LL-dd'),
+          url: data,
+          comment: '',
+        }
+        this.postService.getTodayPicture().subscribe(data => {
+
+          data ? this.postService.modifyPicture(picture, data.id).subscribe(data => {
+            this.todayImage = data
+          }) :
+            this.postService.addImage(picture).subscribe(data => {
+              this.todayImage = data
+            })
+        })
+      })
+    });
   }
 
   async loadingFileData(fileName: any[]) {
@@ -58,6 +90,17 @@ export class TodayComponent implements OnInit {
     }
   }
 
+  // ROUTES
+  goGifs() {
+    this.navCtrl.navigateForward(`/home-user/gifs`, { replaceUrl: true })
+  }
+
+  showTodayImg() {
+    const url = `/home-user/image/${this.todayImage?.id}`
+    this.navCtrl.navigateForward(url, { replaceUrl: true })
+  }
+
+  // ACTION SHEET
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'How do you want to get the picture?',
@@ -88,39 +131,13 @@ export class TodayComponent implements OnInit {
     await actionSheet.present();
   }
 
-  camera() {
-    this.cameraService.addNewToGallery().then((res) => {
-      const base64Data = this.cameraService.readAsBase64(res)
-      base64Data.then(data => {
-        const picture: Image = {
-          id: uuidv4(),
-          name: `${new Date().getTime()}.jpg`,
-          user_id: this.postService.getToken(),
-          date: DateTime.now().toFormat('yyyy-LL-dd'),
-          url: data,
-          comment: '',
-        }
-        this.postService.getTodayPicture().subscribe(data => {
-
-          data ? this.postService.modifyPicture(picture, data.id).subscribe(data => {
-            this.todayImage = data
-          }) :
-            this.postService.addImage(picture).subscribe(data => {
-              this.todayImage = data
-            })
-        })
-
-      })
-
-    });
-  }
-
-  goGifs() {
-    this.navCtrl.navigateForward(`/home-user/gifs`, { replaceUrl: true })
-  }
-
-  showTodayImg() {
-    const url = `/home-user/image/${this.todayImage?.id}`
-    this.navCtrl.navigateForward(url, { replaceUrl: true })
+  // LOADING
+  async presentLoading(message: string) {
+    const loading = await this.loadingCtrl.create({
+      message,
+      spinner: 'circles',
+      cssClass: 'custom-loading',
+    })
+    return await loading.present();
   }
 }
