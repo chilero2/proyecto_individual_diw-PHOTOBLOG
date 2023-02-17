@@ -29,6 +29,9 @@ export class NavComponent implements OnInit {
   goStory() {
     this.navCntl.navigateForward('home-user/my-story')
   }
+  goFriends() {
+    this.navCntl.navigateForward('home-user/friends')
+  }
 
 
 

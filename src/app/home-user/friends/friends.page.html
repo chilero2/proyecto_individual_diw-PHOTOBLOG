@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+  <app-nav></app-nav>
+
+  <ion-searchbar
+    color="secondary"
+    placeholder="Search Gif..."
+    (ionChange)="handleChange($event)"
+    debounce="1000"
+  ></ion-searchbar>
+
+  <div class="container">
+   <div *ngIf="!selectFriend">
+    <div class="images" *ngFor="let friend of friends" >
+      <ion-avatar (click) = "showFriend($event)">
+        <img
+          *ngIf="friend.imgProfile === ''"
+          [alt]="friend.username"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          attr.data-id="{{friend.id}}"
+        />
+        <img
+          *ngIf="friend.imgProfile !== ''"
+          [alt]="friend.username"
+          [src]="friend.imgProfile"
+          class="img"
+          attr.data-id="{{friend.id}}"
+         
+        />
+      </ion-avatar>
+      <small>@{{ friend.username }}</small>
+    </div>
+  </div>
+  </div>
+
+  <app-footer></app-footer>
+</ion-content>

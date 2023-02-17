@@ -16,8 +16,8 @@ import { DateTime } from 'luxon';
 export class PostServiceService {
   logged = false;
 
-  url = 'http://192.168.1.23:3000/'
-  // url = 'http://172.29.228.146:3000/'
+  // url = 'http://192.168.1.23:3000/'
+  url = 'http://172.29.228.146:3000/'
   // url = 'http://localhost:3000/';
 
   constructor(
@@ -43,6 +43,13 @@ export class PostServiceService {
         'Content-Type': 'application/json',
       }),
     });
+  }
+
+  searchFriends(text: string) : Observable<User[]> {
+    const id = `id_ne=${this.getToken()}`  
+    const search = text === '' ? '' : `&username_like=${text}`
+    return this.http.get<User[]>(`${this.url}users?${id}${search}`)
+    .pipe(map((res: User[]) => res))
   }
 
   updateUser(user: User): Observable<User> {
