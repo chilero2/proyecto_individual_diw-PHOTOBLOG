@@ -17,20 +17,20 @@ export class NavComponent implements OnInit {
 
   logOut() {
     this.postService.deleteToken()
-    this.navCntl.navigateRoot('')
+    this.navCntl.navigateRoot('', { replaceUrl: true })
   }
   goHome() {
-    this.navCntl.navigateRoot('home-user')
+    this.navCntl.navigateRoot('home-user', { replaceUrl: true })
   }
 
   goProfile() {
-    this.navCntl.navigateForward('home-user/my-profile')
+    this.navCntl.navigateForward('home-user/my-profile', { replaceUrl: true })
   }
   goStory() {
-    this.navCntl.navigateForward('home-user/my-story')
+    this.navCntl.navigateForward('home-user/my-story', { replaceUrl: true })
   }
   goFriends() {
-    this.navCntl.navigateForward('home-user/friends')
+    this.navCntl.navigateForward('home-user/friends', { replaceUrl: true })
   }
 
 

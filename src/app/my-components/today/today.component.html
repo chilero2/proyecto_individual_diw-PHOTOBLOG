@@ -7,7 +7,7 @@
     <ion-card class="images" (click)="showTodayImg()">
       <ion-img [src]="todayImage.url" alt="{{ todayImage.name }}"></ion-img>
     </ion-card>
-    <p *ngIf="todayImage.comment !== ''">"{{ commentToday }}"</p>
+    <p *ngIf="todayImage.comment !== ''">"{{ todayImage.comment }}"</p>
   </div>
   <app-button
     texto="Simplify my day"

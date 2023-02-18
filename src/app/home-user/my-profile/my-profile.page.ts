@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms'
 import { Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { User } from '../../interfaces/users';
 import { PostServiceService } from '../../post-service.service';
 import { CameraServicesService } from '../../camera-services.service';
@@ -24,15 +24,18 @@ export class MyProfilePage implements OnInit {
   constructor(public formBuilder: FormBuilder,
     private alertController: AlertController,
     public postService: PostServiceService,
-    private route: Router,
     public navCtr: NavController,
-    private cameraServices: CameraServicesService) { }
+    private cameraServices: CameraServicesService,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
-    this.postService.getUser(this.postService.getToken()).subscribe(data => {
-      this.user = data
+    this.presentLoading('Loading...').then(() => {
+      this.postService.getUser(this.postService.getToken()).subscribe(data => {
+        this.loadingCtrl.dismiss()
+        this.user = data
+      })
+      this.formUser = this.buildForm()
     })
-    this.formUser = this.buildForm()
   }
 
   showForm() {
@@ -105,7 +108,6 @@ export class MyProfilePage implements OnInit {
         })
       })
     })
-
   }
 
   async presentAlert(message: string) {
@@ -118,11 +120,19 @@ export class MyProfilePage implements OnInit {
         cssClass: 'alert-button-accept'
       }],
     });
-
     await alert.present();
     return
   }
 
+  // LOADING
+  async presentLoading(message: string) {
+    const loading = await this.loadingCtrl.create({
+      message,
+      spinner: 'circles',
+      cssClass: 'custom-loading',
+    })
+    return await loading.present();
+  }
 }
 
 

@@ -8,37 +8,37 @@ const routes: Routes = [
   {
     path: '',
     component: HomeUserPage,
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'image/:id',
     loadChildren: () => import('./view-image/view-image.module').then(m => m.ViewImagePageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'my-profile',
     loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfilePageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'my-story',
     loadChildren: () => import('./my-story/my-story.module').then(m => m.MyStoryPageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'gifs',
     loadChildren: () => import('./gifs/gifs.module').then(m => m.GifsPageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'friends',
     loadChildren: () => import('./friends/friends.module').then(m => m.FriendsPageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
   {
     path: 'friends/:id',
     loadChildren: () => import('./friends/friends.module').then(m => m.FriendsPageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
 
 

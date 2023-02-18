@@ -22,7 +22,6 @@ export class TodayComponent implements OnInit {
   todayImage: Image | undefined;
   images: Image[] = [];
   imagesUser: Image[] = [];
-  commentToday!: string
 
 
   constructor(
@@ -41,7 +40,6 @@ export class TodayComponent implements OnInit {
       this.postService.getTodayPicture().subscribe(data => {
         this.loadingCtrl.dismiss()
         this.todayImage = data
-        this.commentToday = data.comment
       })
     })
   }

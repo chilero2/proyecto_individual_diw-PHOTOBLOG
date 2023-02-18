@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Image } from 'src/app/interfaces/images';
 import { PostServiceService } from 'src/app/post-service.service';
 import { DateTime } from "luxon";
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
@@ -21,21 +21,24 @@ export class CardPhotoComponent implements OnInit {
     private navCtrl: NavController,
     private postService: PostServiceService,
     public formBuilder: FormBuilder,
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private loadingCtrl: LoadingController) {
 
   }
 
-  async ngOnInit() {
-    const id = this.activeRoute.snapshot.paramMap.get('id')
-    if (id) {
-      await this.postService.getImagePerId(id).subscribe(res => {
-        this.image = res
-        this.showForm = this.image.comment === ''
+  ngOnInit() {
+    this.presentLoading('Loading...').then(() => {
+      const id = this.activeRoute.snapshot.paramMap.get('id')
+      if (id) {
+        this.postService.getImagePerId(id).subscribe(res => {
+          this.loadingCtrl.dismiss()
+          this.image = res
+          this.showForm = this.image.comment === ''
+        }
+        )
       }
-      )
-    }
-
-    this.formComment = this.buildForm()
+      this.formComment = this.buildForm()
+    })
   }
 
   buildForm(): FormGroup {
@@ -55,7 +58,7 @@ export class CardPhotoComponent implements OnInit {
 
 
   back() {
-    this.navCtrl.navigateBack('/home-user')
+    this.navCtrl.navigateRoot('home-user', { replaceUrl: true })
   }
 
   loadImage() {
@@ -104,6 +107,16 @@ export class CardPhotoComponent implements OnInit {
 
     await alert.present();
     return
+  }
+
+  // LOADING
+  async presentLoading(message: string) {
+    const loading = await this.loadingCtrl.create({
+      message,
+      spinner: 'circles',
+      cssClass: 'custom-loading',
+    })
+    return await loading.present();
   }
 
 

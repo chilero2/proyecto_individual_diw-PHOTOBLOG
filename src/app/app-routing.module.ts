@@ -17,17 +17,17 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./home/login/login.module').then(m => m.LoginPageModule),
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   },
   {
     path: 'register',
     loadChildren: () => import('./home/register/register.module').then(m => m.RegisterPageModule),
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   },
   {
     path: 'home-user',
     loadChildren: () => import('./home-user/home-user.module').then(m => m.HomeUserPageModule),
-    canActivate: [NoLoginGuard]
+    // canActivate: [NoLoginGuard]
   },
 
 
